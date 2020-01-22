@@ -13,6 +13,8 @@ import frc.robot.subsystems.*;
 
 public class TankDriveCommand extends CommandBase {
   private DriveTrain m_driveTrain;
+  private Joystick m_joystickRight;
+  private Joystick m_joystickLeft;
 
   /**
    * Creates a new TankDriveCommand.
@@ -20,7 +22,10 @@ public class TankDriveCommand extends CommandBase {
   public TankDriveCommand(DriveTrain driveTrain, Joystick joystickRight, Joystick joystickLeft) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = driveTrain;
+    m_joystickLeft = joystickLeft;
+    m_joystickRight = joystickRight;
     addRequirements(m_driveTrain);
+
   }
 
   // Called when the command is initially scheduled.
@@ -31,7 +36,7 @@ public class TankDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    m_driveTrain.drive(-m_joystickLeft.getY(), -m_joystickRight.getY());
   }
 
   // Called once the command ends or is interrupted.

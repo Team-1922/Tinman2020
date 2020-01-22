@@ -9,12 +9,10 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.TankDriveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
 /**
  * Add your docs here.
  */
@@ -30,16 +28,14 @@ public class DriveTrain extends SubsystemBase {
     super();
     rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
     rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
+    frontRight.setInverted(true);
+    rearRight.setInverted(InvertType.FollowMaster);
+    frontLeft.setInverted(false);
+    rearLeft.setInverted(InvertType.FollowMaster);
     
   }
 
-  // @Override
-  public void initDefaultCommand() {
-    setDefaultCommand(new TankDriveCommand(m_DriveTrain,));
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-  }
-
+  
   public void drive(double left, double right)
   {
     frontLeft.set(left);
