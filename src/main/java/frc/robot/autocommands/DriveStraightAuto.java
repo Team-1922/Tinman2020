@@ -17,6 +17,10 @@ public class DriveStraightAuto extends CommandBase {
   private double m_speed;
   private Timer m_timer;
   private double m_time;
+  double error = 0;
+  double errorPrior = 0;
+  double initAngle = 0;
+  
   /**
    * Creates a new testCommand.
    */
@@ -34,12 +38,21 @@ public class DriveStraightAuto extends CommandBase {
   @Override
   public void initialize() {
     m_timer.start();
+    initAngle = m_driveTrain.getAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.drive(m_speed, m_speed);
+    double p = .02;
+    double d = 0.0001;
+    double derivative;
+
+    error = initAngle - m_driveTrain.getAngle();
+    derivative = (error - errorPrior) / .02;
+    double responce = p * error + (d * derivative);
+    m_driveTrain.drive(m_speed + responce, m_speed - responce);
+    errorPrior = error;
   }
 
   // Called once the command ends or is interrupted.
