@@ -14,6 +14,7 @@ import frc.robot.autocommands.DriveStraightAuto;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -26,8 +27,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain m_driveTrain = new DriveTrain();
 
-  private final Joystick m_joystickLeft = new Joystick(0);
-  private final Joystick m_joystickRight = new Joystick(1);
+  private final Joystick m_joystickLeft = new Joystick(1);
+  private final Joystick m_joystickRight = new Joystick(0);
 
   private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft, m_joystickRight);
   private final DriveStraightAuto m_autoCommand = new DriveStraightAuto(m_driveTrain, .3, 5);
@@ -39,7 +40,6 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     m_driveTrain.setDefaultCommand(m_TankDrive);
-    
 
   }
 
@@ -50,7 +50,8 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
+    new JoystickButton(m_joystickLeft, Joystick.ButtonType.kTrigger.value)
+        .whileHeld(new DriveStraight(m_driveTrain, m_joystickLeft, m_joystickRight));
   }
 
   /**
