@@ -10,11 +10,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.autocommands.AutoTurn;
 import frc.robot.autocommands.DriveStraightAuto;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -32,6 +34,7 @@ public class RobotContainer {
 
   private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft, m_joystickRight);
   private final DriveStraightAuto m_autoCommand = new DriveStraightAuto(m_driveTrain, .2, 5);
+  // private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -52,6 +55,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(m_joystickLeft, Joystick.ButtonType.kTrigger.value)
         .whileHeld(new DriveStraight(m_driveTrain, m_joystickLeft, m_joystickRight));
+    new JoystickButton(m_joystickLeft, 3)
+        .whenPressed(new AutoTurn(m_driveTrain, -90));
+    new JoystickButton(m_joystickLeft, 4)
+        .whenPressed(new AutoTurn(m_driveTrain, 90));
   }
 
   /**
@@ -63,4 +70,5 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
+
 }
