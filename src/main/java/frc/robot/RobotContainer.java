@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.autocommands.AutoTurn;
 import frc.robot.autocommands.DriveStraightAuto;
+import frc.robot.autogroups.DefaultAuto;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -33,8 +33,9 @@ public class RobotContainer {
   private final Joystick m_joystickRight = new Joystick(0);
 
   private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft, m_joystickRight);
-  private final DriveStraightAuto m_autoCommand = new DriveStraightAuto(m_driveTrain, .2, 5);
+  // private final DriveStraightAuto m_autoCommand = new DriveStraightAuto(m_driveTrain, .2, 5);
   // private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
+  private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
