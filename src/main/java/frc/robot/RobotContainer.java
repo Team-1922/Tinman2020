@@ -33,9 +33,9 @@ public class RobotContainer {
   private final Joystick m_joystickRight = new Joystick(0);
 
   private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft, m_joystickRight);
-  // private final DriveStraightAuto m_autoCommand = new DriveStraightAuto(m_driveTrain, .2, 5);
-  // private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
-  private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
+  // private final DriveStraightAuto m_autoCommand = new DriveStraightAuto(m_driveTrain, .2, 2);
+  private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
+  //private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.

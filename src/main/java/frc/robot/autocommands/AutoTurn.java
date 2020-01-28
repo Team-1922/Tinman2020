@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutoTurn extends CommandBase {
+  private static final double minimumResponse = 0.35;
+
   private DriveTrain m_driveTrain;
   private double m_angle;
   double error = 0;
@@ -50,10 +52,10 @@ public class AutoTurn extends CommandBase {
     error = initAngle - (m_driveTrain.getAngle()) + m_angle;
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
-    if (responce <= 0.25 && isNegative == false) {
-      responce = 0.25;
-    } else if (responce >= 0.25 && isNegative == true) {
-      responce = -0.25;
+    if (responce <= minimumResponse && isNegative == false) {
+      responce = minimumResponse;
+    } else if (responce >= minimumResponse && isNegative == true) {
+      responce = -minimumResponse;
     }
     m_driveTrain.drive(responce, -responce);
     errorPrior = error;
