@@ -18,6 +18,7 @@ public class DriveStraight extends CommandBase {
   private DriveTrain m_driveTrain;
   private Joystick m_joystickRight;
   private Joystick m_joystickLeft;
+
   /**
    * Creates a new DriveStraight.
    */

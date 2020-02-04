@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-
 public class DriveStraightAuto extends CommandBase {
   private DriveTrain m_driveTrain;
   private double m_speed;
@@ -20,7 +19,7 @@ public class DriveStraightAuto extends CommandBase {
   double error = 0;
   double errorPrior = 0;
   double initAngle = 0;
-  
+
   /**
    * Creates a new testCommand.
    */

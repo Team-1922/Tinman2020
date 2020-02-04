@@ -7,36 +7,33 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
-public class TankDriveCommand extends CommandBase {
-  private DriveTrain m_driveTrain;
-  private Joystick m_joystickRight;
-  private Joystick m_joystickLeft;
+public class ShootingCommand extends CommandBase {
+  private Shooter m_shooter;
+  private double m_speed;
 
   /**
-   * Creates a new TankDriveCommand.
+   * Creates a new ShootingCommand.
    */
-  public TankDriveCommand(DriveTrain driveTrain, Joystick joystickRight, Joystick joystickLeft) {
+  public ShootingCommand(Shooter shooter, double speed) {
+    m_shooter = shooter;
+    m_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
-    m_driveTrain = driveTrain;
-    m_joystickLeft = joystickLeft;
-    m_joystickRight = joystickRight;
-    addRequirements(m_driveTrain);
-
+    addRequirements(m_shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.drive(-m_joystickLeft.getY(), -m_joystickRight.getY());
+    m_shooter.shoot(m_speed);
   }
 
   // Called once the command ends or is interrupted.

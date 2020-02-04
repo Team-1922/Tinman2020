@@ -19,8 +19,21 @@ package frc.robot;
  */
 public final class Constants {
 
+    // drivetrain
     public static final int frontLeft = 0;
     public static final int frontRight = 1;
     public static final int rearLeft = 2;
     public static final int rearRight = 3;
+    // shooter
+    public static final int shooterLeft = 4;
+    public static final int shooterRight = 5;
+    // collector
+    public static final int pickUp = 6;
+    public static final int pickUpTransfer = 7;
+    public static final int linearLoaderT = 8;
+    public static final int linearLoaderB = 9;
+    // linear
+    public static final int transferFront = 10;
+    public static final int transferRear = 11;
+
 }

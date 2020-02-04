@@ -19,24 +19,24 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class DefaultAuto extends SequentialCommandGroup {
     private DriveTrain m_driveTrain;
+
     public DefaultAuto(DriveTrain driveTrain) {
         m_driveTrain = driveTrain;
-        addCommands(
-            new DriveStraightAuto(m_driveTrain, .2, 2),
+        addCommands(new DriveStraightAuto(m_driveTrain, .2, 2),
 
-            new AutoTurn(m_driveTrain, 90),
+                new AutoTurn(m_driveTrain, 90),
 
-            new DriveStraightAuto(m_driveTrain, .2, 2),
-            
-            new AutoStop(m_driveTrain),
+                new DriveStraightAuto(m_driveTrain, .2, 2),
 
-            new Delay(1),
+                new AutoStop(m_driveTrain),
 
-            new DriveStraightAuto(m_driveTrain, -.2, 2),
+                new Delay(1),
 
-            new AutoTurn(m_driveTrain, -90),
+                new DriveStraightAuto(m_driveTrain, -.2, 2),
 
-            new DriveStraightAuto(m_driveTrain, -.2, 2)
+                new AutoTurn(m_driveTrain, -90),
+
+                new DriveStraightAuto(m_driveTrain, -.2, 2)
 
         );
     }

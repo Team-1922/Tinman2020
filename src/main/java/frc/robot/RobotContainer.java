@@ -10,13 +10,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.autocommands.AutoTurn;
-import frc.robot.autocommands.DriveStraightAuto;
-import frc.robot.autogroups.DefaultAuto;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.autocommands.AutoTurn;
+import frc.robot.commands.DriveStraight;
+import frc.robot.commands.ShootingCommand;
+import frc.robot.commands.TankDriveCommand;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -28,14 +29,18 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain m_driveTrain = new DriveTrain();
+  private final Shooter m_Shooter = new Shooter();
 
   private final Joystick m_joystickLeft = new Joystick(1);
   private final Joystick m_joystickRight = new Joystick(0);
 
+  private final XboxController m_XBoxController = new XboxController(2);
+
   private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft, m_joystickRight);
-  // private final DriveStraightAuto m_autoCommand = new DriveStraightAuto(m_driveTrain, .2, 2);
+  // private final DriveStraightAuto m_autoCommand = new
+  // DriveStraightAuto(m_driveTrain, .2, 2);
   private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
-  //private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
+  // private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -54,12 +59,19 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_joystickLeft, Joystick.ButtonType.kTrigger.value)
+    new JoystickButton(m_joystickLeft, 1)
+        //
         .whileHeld(new DriveStraight(m_driveTrain, m_joystickLeft, m_joystickRight));
     new JoystickButton(m_joystickLeft, 3)
+        //
         .whenPressed(new AutoTurn(m_driveTrain, -90));
     new JoystickButton(m_joystickLeft, 4)
+        //
         .whenPressed(new AutoTurn(m_driveTrain, 90));
+    new JoystickButton(m_XBoxController, 2)
+        //
+        .toggleWhenPressed(new ShootingCommand(m_Shooter, 50));
+
   }
 
   /**
