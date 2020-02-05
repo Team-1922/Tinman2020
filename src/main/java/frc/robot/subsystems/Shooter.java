@@ -14,20 +14,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
- * Add your docs here.
+ * shhoot shoot bang bagn
  */
 public class Shooter extends SubsystemBase {
     private WPI_TalonSRX shooterLeft = new WPI_TalonSRX(Constants.shooterLeft);
     private WPI_TalonSRX shooterRight = new WPI_TalonSRX(Constants.shooterRight);
 
-    public Shooter(){
+    public Shooter() {
         super();
         shooterRight.set(ControlMode.Follower, shooterLeft.getDeviceID());
         shooterLeft.setInverted(false);
         shooterRight.setInverted(true);
     }
 
-    public void shoot(double speed){
+    public void shoot(double speed) {
         shooterLeft.set(speed);
         shooterRight.set(speed);
 

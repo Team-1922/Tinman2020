@@ -16,7 +16,7 @@ public class Delay extends CommandBase {
   private double m_time;
 
   /**
-   * Creates a new Delay.
+   * Stop for x seconds
    */
   public Delay(double time) {
     m_time = time;

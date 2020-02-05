@@ -15,10 +15,14 @@ import frc.robot.subsystems.DriveTrain;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class AutoStop extends InstantCommand {
   private DriveTrain m_driveTrain;
+  /**
+   * stooooooooooooooooooooooop
+   * 
+   * @param driveTrain
+   */
   public AutoStop(DriveTrain driveTrain) {
     m_driveTrain = driveTrain;
     addRequirements(m_driveTrain);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.

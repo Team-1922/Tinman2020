@@ -21,10 +21,9 @@ public class DriveStraightAuto extends CommandBase {
   double initAngle = 0;
 
   /**
-   * Creates a new testCommand.
+   * Takes the current angle through the gyroscope, and keep the bot poining in that direction
    */
   public DriveStraightAuto(DriveTrain driveTrain, double speed, double time) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = driveTrain;
     m_speed = speed;
     m_timer = new Timer();

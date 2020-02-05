@@ -15,7 +15,7 @@ import frc.robot.autocommands.DriveStraightAuto;
 import frc.robot.subsystems.DriveTrain;
 
 /**
- * Add your docs here.
+ * Creates a short set of auto commands to run in a sequence
  */
 public class DefaultAuto extends SequentialCommandGroup {
     private DriveTrain m_driveTrain;

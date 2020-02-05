@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
- * Add your docs here.
+ * Collector Subsystem
  */
 public class Collector extends SubsystemBase {
   private WPI_TalonSRX pickUp = new WPI_TalonSRX(Constants.pickUp);

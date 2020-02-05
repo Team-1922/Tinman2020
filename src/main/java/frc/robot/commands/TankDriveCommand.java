@@ -17,10 +17,9 @@ public class TankDriveCommand extends CommandBase {
   private Joystick m_joystickLeft;
 
   /**
-   * Creates a new TankDriveCommand.
+   * it do the drive thign
    */
   public TankDriveCommand(DriveTrain driveTrain, Joystick joystickRight, Joystick joystickLeft) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = driveTrain;
     m_joystickLeft = joystickLeft;
     m_joystickRight = joystickRight;

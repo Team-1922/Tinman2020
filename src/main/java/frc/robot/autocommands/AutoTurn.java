@@ -24,10 +24,9 @@ public class AutoTurn extends CommandBase {
   boolean isNegative = false;
 
   /**
-   * Creates a new AutoTurn.
+   * Turns the robot an X amount of degrees
    */
   public AutoTurn(DriveTrain driveTrain, double angle) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = driveTrain;
     m_angle = angle;
     addRequirements(m_driveTrain);

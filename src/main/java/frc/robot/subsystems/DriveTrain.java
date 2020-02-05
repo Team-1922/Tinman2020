@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
- * Add your docs here.
+ * manages the speed of the wheels
  */
 public class DriveTrain extends SubsystemBase {
   // Put methods for controlling this subsystem

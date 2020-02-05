@@ -20,10 +20,9 @@ public class DriveStraight extends CommandBase {
   private Joystick m_joystickLeft;
 
   /**
-   * Creates a new DriveStraight.
+   * Hold the button and it doesn't rotate
    */
   public DriveStraight(DriveTrain driveTrain, Joystick joystickRight, Joystick joystickLeft) {
-    // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = driveTrain;
     m_joystickLeft = joystickLeft;
     m_joystickRight = joystickRight;
