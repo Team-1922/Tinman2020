@@ -7,17 +7,18 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.SPI;
-import frc.robot.Constants;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI;
+// import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+
 /**
- * Add your docs here.
+ * manages the speed of the wheels
  */
 public class DriveTrain extends SubsystemBase {
   // Put methods for controlling this subsystem
@@ -27,6 +28,7 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.frontRight);
   private WPI_TalonSRX rearRight = new WPI_TalonSRX(Constants.rearRight);
   private AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  // private Solenoid test;
 
   public DriveTrain() {
     super();
@@ -34,14 +36,14 @@ public class DriveTrain extends SubsystemBase {
     rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
     frontRight.setInverted(true);
     rearRight.setInverted(InvertType.FollowMaster);
-    frontLeft.setInverted(false);
+    frontLeft.setInverted(true);
     rearLeft.setInverted(InvertType.FollowMaster);
-
+    // test = new Solenoid(0);
   }
 
   public void drive(double left, double right) {
     frontLeft.set(left);
-    frontRight.set(right);
+    frontRight.set(-right);
   }
 
   public double getAngle() {
