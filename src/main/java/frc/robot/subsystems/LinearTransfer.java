@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,5 +22,16 @@ public class LinearTransfer extends SubsystemBase {
 
   public LinearTransfer() {
     super();
+    transferRear.setInverted(InvertType.FollowMaster);
   }
+
+  public void drive(double speed) {
+    transferFront.set(speed);
+    transferRear.set(speed);
+  }
+
+  public int getEncoders() {
+    return transferFront.getSensorCollection().getQuadraturePosition();
+  }
+
 }
