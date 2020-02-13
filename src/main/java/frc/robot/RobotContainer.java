@@ -23,6 +23,8 @@ import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LinearTransfer;
 import frc.robot.subsystems.Shooter;
+import frc.robot.commands.ShootVelocity;
+import frc.robot.commands.CollectorToggle;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -46,7 +48,7 @@ public class RobotContainer {
   private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft, m_joystickRight);
   private final TransferPassive m_TransferPassive = new TransferPassive(m_lTransfer, .3);
   private final CollectorUp m_CollectorUp = new CollectorUp(m_Collector);
-  private final CollectorDown m_CollectorDown = new CollectorDown(m_Collector, 0.3);
+  private final CollectorDown m_CollectorDown = new CollectorDown(m_Collector);
   // private final DriveStraightAuto m_autoCommand = new
   // DriveStraightAuto(m_driveTrain, .2, 2);
   private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
@@ -79,12 +81,18 @@ public class RobotContainer {
     new JoystickButton(m_joystickLeft, 4)
         //
         .whenPressed(new AutoTurn(m_driveTrain, 90));
-    new JoystickButton(m_XBoxController, 2)
+    new JoystickButton(m_joystickRight, 2)
         //
-        .toggleWhenPressed(new ShootingCommand(m_Shooter, 50));
-    new JoystickButton(m_XBoxController, 3)
+        .whenPressed(new CollectorToggle(m_Collector));
+    new JoystickButton(m_XBoxController, Constants.yButton)
         //
-        .toggleWhenPressed(m_CollectorDown);
+        .toggleWhenPressed(new ShootVelocity(m_Shooter, 75));
+    new JoystickButton(m_XBoxController, Constants.bButton)
+        //
+        .toggleWhenPressed(new ShootVelocity(m_Shooter, 50));  
+    new JoystickButton(m_XBoxController, Constants.aButton)
+        //
+        .toggleWhenPressed(new ShootVelocity(m_Shooter, 25));  
 
   }
 

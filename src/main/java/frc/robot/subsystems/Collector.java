@@ -22,13 +22,16 @@ public class Collector extends SubsystemBase {
   // private WPI_TalonSRX linearLoaderT = new WPI_TalonSRX(Constants.linearLoaderT);
   // private WPI_TalonSRX linearLoaderB = new WPI_TalonSRX(Constants.linearLoaderB);
   private Solenoid CollectorSolenoid;
+  private double m_MaxSpeed = .5;
 
   public Collector() {
     super();
     CollectorSolenoid = new Solenoid(0);
   }
+
   public void drive(double speed) {
-    pickUp.set(speed);
+    double clampedSpeed = ClampSpeed(speed);
+    pickUp.set (clampedSpeed);
   }
 
   public void CollectorUp(){
@@ -37,8 +40,28 @@ public class Collector extends SubsystemBase {
   public void CollectorDown(){
     CollectorSolenoid.set(false);
   }
-  public void ToggleCollector(){
+  public void CollectorToggle(){
     CollectorSolenoid.set(!CollectorSolenoid.get());
+  }
+  private double ClampSpeed(double speed){
+    if(speed>0){
+      if(speed>m_MaxSpeed){
+        return m_MaxSpeed;
+      }
+      else {
+        return speed;
+      }
+    }
+    else {
+      if(speed<-m_MaxSpeed){
+        return -m_MaxSpeed; 
+      }
+      else {
+        return speed;
+      }
+    }
+  
+    
   }
 
 }
