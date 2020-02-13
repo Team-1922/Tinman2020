@@ -10,13 +10,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Collector;
 
-public class CollectorUp extends CommandBase {
+public class CollectorToggle extends CommandBase {
   private Collector m_subsystem;
+
   /**
    * Creates a new CollectorPassive.
    */
-  public CollectorUp(Collector subsystem) {
+  public CollectorToggle(Collector subsystem) {
     m_subsystem = subsystem;
+
     addRequirements(m_subsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -24,8 +26,8 @@ public class CollectorUp extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.CollectorUp();
-    m_subsystem.drive(0);
+    m_subsystem.CollectorToggle();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.

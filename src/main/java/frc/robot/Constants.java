@@ -45,4 +45,9 @@ public final class Constants {
     public static final int transferFront = 4;
     public static final int transferRear = 9;
 
+    public static final int xButton = 3;
+    public static final int yButton = 4;
+    public static final int aButton = 1;
+    public static final int bButton = 2;
+
 }

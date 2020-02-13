@@ -12,13 +12,13 @@ import frc.robot.subsystems.Collector;
 
 public class CollectorDown extends CommandBase {
   private Collector m_subsystem;
-  private double m_speed;
+
   /**
    * Creates a new CollectorPassive.
    */
-  public CollectorDown(Collector subsystem, double speed) {
+  public CollectorDown(Collector subsystem) {
     m_subsystem = subsystem;
-    m_speed = speed;
+
     addRequirements(m_subsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -33,7 +33,7 @@ public class CollectorDown extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.drive(m_speed);
+    
   }
 
   // Called once the command ends or is interrupted.
@@ -44,6 +44,6 @@ public class CollectorDown extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
