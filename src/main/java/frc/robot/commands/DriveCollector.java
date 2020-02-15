@@ -7,36 +7,34 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Collector;
 
-public class TankDriveCommand extends CommandBase {
-  private DriveTrain m_driveTrain;
-  private Joystick m_joystickRight;
-  private Joystick m_joystickLeft;
-
+public class DriveCollector extends CommandBase {
+  private Collector m_Collector;
+  private double m_speed;
   /**
-   * it do the drive thign
+   * Creates a new DriveCollector.
    */
-  public TankDriveCommand(DriveTrain driveTrain, Joystick joystickRight, Joystick joystickLeft) {
-    m_driveTrain = driveTrain;
-    m_joystickLeft = joystickLeft;
-    m_joystickRight = joystickRight;
-    addRequirements(m_driveTrain);
-
+  public DriveCollector(Collector subsystem, double speed) {
+    m_Collector = subsystem;
+    m_speed = speed;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_Collector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_Collector.CollectorDown();
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.drive(-m_joystickLeft.getY(), -m_joystickRight.getY(), m_driveTrain.getFLip());
-    // m_driveTrain.drive(-m_joystickLeft.getThrottle(), -m_joystickRight.getThrottle());
+    
+    m_Collector.drive(m_speed);
   }
 
   // Called once the command ends or is interrupted.
