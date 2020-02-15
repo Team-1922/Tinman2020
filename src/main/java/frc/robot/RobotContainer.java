@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autocommands.AutoTurn;
 import frc.robot.commands.CollectorDown;
 import frc.robot.commands.CollectorUp;
-import frc.robot.commands.DriveCollector;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.Limelight;
 import frc.robot.commands.ShootingCommand;
@@ -94,7 +93,7 @@ public class RobotContainer {
 
     new JoystickButton(m_XBoxController, 7)
         //
-        .toggleWhenPressed(new DriveCollector(m_Collector, .5));
+        .toggleWhenPressed(new CollectorDown(m_Collector, .5));
 
     new JoystickButton(m_XBoxController, 6)
         //

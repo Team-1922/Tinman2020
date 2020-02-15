@@ -8,7 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,8 +18,8 @@ import frc.robot.Constants;
  * shhoot shoot bang bagn
  */
 public class Shooter extends SubsystemBase {
-    private WPI_TalonSRX shooterLeft = new WPI_TalonSRX(Constants.shooterLeft);
-    private WPI_TalonSRX shooterRight = new WPI_TalonSRX(Constants.shooterRight);
+    private WPI_TalonFX shooterLeft = new WPI_TalonFX(Constants.shooterLeft);
+    private WPI_TalonFX shooterRight = new WPI_TalonFX(Constants.shooterRight);
     private Solenoid hoodSolenoid;
     // private WPI_TalonFX shooterLeft = new WPI_TalonFX(Constants.shooterLeft);
     // private WPI_TalonFX shooterRight = new WPI_TalonFX(Constants.shooterRight);
