@@ -17,10 +17,7 @@ import frc.robot.Constants;
  * Collector Subsystem
  */
 public class Collector extends SubsystemBase {
-  private WPI_TalonSRX pickUp = new WPI_TalonSRX(Constants.pickUp);
-  // private WPI_TalonSRX pickUpTransfer = new WPI_TalonSRX(Constants.pickUpTransfer);
-  // private WPI_TalonSRX linearLoaderT = new WPI_TalonSRX(Constants.linearLoaderT);
-  // private WPI_TalonSRX linearLoaderB = new WPI_TalonSRX(Constants.linearLoaderB);
+  private WPI_TalonSRX pickUp = new WPI_TalonSRX(Constants.collector);
   private Solenoid CollectorSolenoid;
 
   public Collector() {

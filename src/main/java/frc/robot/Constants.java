@@ -49,4 +49,9 @@ public final class Constants {
     public static final int shooterLeft = 10;
     public static final int shooterRight = 11;
 
+    // pneumatics
+    public static final int tensioner = 1;
+    public static final int hood = 2;
+
+
 }

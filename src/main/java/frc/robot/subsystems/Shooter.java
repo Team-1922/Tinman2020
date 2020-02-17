@@ -21,6 +21,7 @@ public class Shooter extends SubsystemBase {
     private WPI_TalonFX shooterLeft = new WPI_TalonFX(Constants.shooterLeft);
     private WPI_TalonFX shooterRight = new WPI_TalonFX(Constants.shooterRight);
     private Solenoid hoodSolenoid;
+    private Solenoid tensionerSolenoid;
     // private WPI_TalonFX shooterLeft = new WPI_TalonFX(Constants.shooterLeft);
     // private WPI_TalonFX shooterRight = new WPI_TalonFX(Constants.shooterRight);
 
@@ -30,6 +31,8 @@ public class Shooter extends SubsystemBase {
         shooterLeft.setInverted(false);
         shooterRight.setInverted(true);
         hoodSolenoid = new Solenoid(1);
+        tensionerSolenoid = new Solenoid(Constants.tensioner);
+        tensionerSolenoid.set(true);
     }
 
     public void shoot(double speed) {
