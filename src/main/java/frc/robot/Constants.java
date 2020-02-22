@@ -20,29 +20,40 @@ package frc.robot;
 
 public final class Constants {
 
-    
+    // talon placement
+    // 5 0
+    // 6 1
+    // 7 2
+    // 8 3
+    // 9 4
+
     /*
-    talon placement
-    5  0 
-    6  1
-    7  2
-    8  3
-    9  4
-    */
-    public static final int frontRight = 0;
-    public static final int frontLeft = 5;
-    public static final int rearRight = 1;
-    public static final int rearLeft = 6;
-    // shooter
-    public static final int shooterRight = 2;
-    public static final int shooterLeft = 7;
-    // collector
-    public static final int pickUp = 3;
-    public static final int pickUpTransfer = 8;
-    // public static final int linearLoaderT = 4;
-    // public static final int linearLoaderB = 9;
-    // linear
-    public static final int transferFront = 4;
-    public static final int transferRear = 9;
+     * public static final int frontRight = 0; public static final int frontLeft =
+     * 5; public static final int rearRight = 1; public static final int rearLeft =
+     * 6; // shooter public static final int shooterRight = 2; public static final
+     * int shooterLeft = 7; // collector public static final int pickUp = 3; public
+     * static final int pickUpTransfer = 8; // public static final int linearLoaderT
+     * = 4; // public static final int linearLoaderB = 9; // linear public static
+     * final int transferFront = 4; public static final int transferRear = 9;
+     */
+    public static final int linearIntake = 0;
+    public static final int rearLeft = 1;
+    public static final int frontLeft = 2;
+    public static final int linearTransfer = 3;
+    public static final int centerLeft = 4;
+    public static final int collector = 5;
+    public static final int rearRight = 6;
+    public static final int frontRight = 7;
+    public static final int unused = 8;
+    public static final int centerRight = 9;
+    public static final int shooterLeft = 10;
+    public static final int shooterRight = 11;
+
+    // pneumatics
+    // public static final int collectorRight = 0;
+    public static final int tensioner = 1;
+    public static final int hood = 2;
+    public static final int collectorP = 3;
+    
 
 }

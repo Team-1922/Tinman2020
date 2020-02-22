@@ -12,8 +12,11 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.SPI;
-// import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -28,7 +31,14 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.frontRight);
   private WPI_TalonSRX rearRight = new WPI_TalonSRX(Constants.rearRight);
   private AHRS ahrs = new AHRS(SPI.Port.kMXP);
-  // private Solenoid test;
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+  NetworkTableEntry tx = table.getEntry("tx");
+  NetworkTableEntry ty = table.getEntry("ty");
+  NetworkTableEntry ta = table.getEntry("ta");
+  private double x = tx.getDouble(0.0);
+  private double y = ty.getDouble(0.0);
+  private double area = ta.getDouble(0.0);
+  private boolean isFlipped = false;
 
   public DriveTrain() {
     super();
@@ -38,15 +48,49 @@ public class DriveTrain extends SubsystemBase {
     rearRight.setInverted(InvertType.FollowMaster);
     frontLeft.setInverted(true);
     rearLeft.setInverted(InvertType.FollowMaster);
-    // test = new Solenoid(0);
   }
 
-  public void drive(double left, double right) {
-    frontLeft.set(left);
-    frontRight.set(-right);
+  public void drive(double left, double right, boolean flipped) {
+    if (flipped) {
+      frontLeft.set(-left);
+      frontRight.set(right);
+    } else {
+      frontLeft.set(left);
+      frontRight.set(-right);
+    }
+
   }
 
   public double getAngle() {
     return ahrs.getAngle();
   }
+
+  public void refreshLimelight() {
+    x = tx.getDouble(0.0);
+    y = ty.getDouble(0.0);
+    area = ta.getDouble(0.0);
+
+    // post to smart dashboard periodically
+    SmartDashboard.putNumber("LimelightX", x);
+    SmartDashboard.putNumber("LimelightY", y);
+    SmartDashboard.putNumber("LimelightArea", area);
+  }
+
+  public void setFlip(boolean f){
+    isFlipped = f;
+  }
+  public boolean getFLip(){
+    return isFlipped;
+  }
+  public void toggleFlip(){
+    isFlipped = !isFlipped;
+  }
+
+  public double getLeftEncoder(){
+    return frontLeft.getSensorCollection().getQuadraturePosition();
+  }
+  public double getRightEncoder(){
+    return frontRight.getSensorCollection().getQuadraturePosition();
+  }
+
 }

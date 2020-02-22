@@ -10,13 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LinearTransfer;
 
-public class TransferPassive extends CommandBase {
+public class TransferCommand extends CommandBase {
   private LinearTransfer m_subsystem;
   private double m_speed;
   /**
    * Creates a new TransferPassive.
    */
-  public TransferPassive(LinearTransfer subsystem, double speed) {
+  public TransferCommand(LinearTransfer subsystem, double speed) {
     m_subsystem = subsystem;
     m_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.

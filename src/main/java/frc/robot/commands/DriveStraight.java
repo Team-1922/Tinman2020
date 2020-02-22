@@ -46,7 +46,7 @@ public class DriveStraight extends CommandBase {
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
     double RawY = (m_joystickLeft.getY() + m_joystickRight.getY()) / 2;
-    m_driveTrain.drive(-RawY + responce, -RawY - responce);
+    m_driveTrain.drive(-RawY + responce, -RawY - responce, m_driveTrain.getFLip());
     errorPrior = error;
   }
 
