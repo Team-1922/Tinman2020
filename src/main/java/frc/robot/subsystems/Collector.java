@@ -18,24 +18,34 @@ import frc.robot.Constants;
  */
 public class Collector extends SubsystemBase {
   private WPI_TalonSRX pickUp = new WPI_TalonSRX(Constants.collector);
+  private WPI_TalonSRX centerLeft = new WPI_TalonSRX(Constants.centerLeft);
+  private WPI_TalonSRX centerRight = new WPI_TalonSRX(Constants.centerRight);
   private Solenoid CollectorSolenoid;
 
   public Collector() {
     super();
-    CollectorSolenoid = new Solenoid(0);
-  }
-  public void drive(double speed) {
-    pickUp.set(speed);
+    CollectorSolenoid = new Solenoid(Constants.collectorP);
   }
 
-  public void CollectorUp(){
-    CollectorSolenoid.set(true);
+  public void drive(double speed) {
+    pickUp.set(speed);
+    centerLeft.set(-speed);
+    centerRight.set(-speed);
   }
-  public void CollectorDown(){
-    CollectorSolenoid.set(false);
+
+  public void CollectorUp() {
+     CollectorSolenoid.set(true);
+    // CollectorSolenoidRight.set(true);
   }
-  public void ToggleCollector(){
-    CollectorSolenoid.set(!CollectorSolenoid.get());
+
+  public void CollectorDown() {
+     CollectorSolenoid.set(false);
+    // CollectorSolenoidRight.set(false);
+  }
+
+  public void ToggleCollector() {
+     CollectorSolenoid.set(! CollectorSolenoid.get());
+    // CollectorSolenoidRight.set(!CollectorSolenoidRight.get());
   }
 
 }

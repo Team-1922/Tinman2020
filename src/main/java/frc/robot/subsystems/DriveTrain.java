@@ -86,4 +86,11 @@ public class DriveTrain extends SubsystemBase {
     isFlipped = !isFlipped;
   }
 
+  public double getLeftEncoder(){
+    return frontLeft.getSensorCollection().getQuadraturePosition();
+  }
+  public double getRightEncoder(){
+    return frontRight.getSensorCollection().getQuadraturePosition();
+  }
+
 }

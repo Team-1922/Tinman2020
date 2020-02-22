@@ -23,6 +23,7 @@ public class LinearTransfer extends SubsystemBase {
   public LinearTransfer() {
     super();
     linearIntake.set(ControlMode.Follower, linearTransfer.getDeviceID());
+    linearIntake.setInverted(false);
   }
 
   public void drive(double speed) {
