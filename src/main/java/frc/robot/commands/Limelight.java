@@ -41,6 +41,7 @@ public class Limelight extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_DriveTrain.setLimelightLight(3);
 
   }
 
@@ -69,6 +70,7 @@ public class Limelight extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(final boolean interrupted) {
+    m_DriveTrain.setLimelightLight(1);
   }
 
   // Returns true when the command should end.

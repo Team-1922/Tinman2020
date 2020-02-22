@@ -44,7 +44,7 @@ public final class Constants {
     public static final int collector = 5;
     public static final int rearRight = 6;
     public static final int frontRight = 7;
-    public static final int unused = 8;
+    public static final int kickerMotor = 8;
     public static final int centerRight = 9;
     public static final int shooterLeft = 10;
     public static final int shooterRight = 11;
@@ -58,7 +58,7 @@ public final class Constants {
     
 
     // speeds
-    public static final int shooterSpeed = 3400;
+    public static final double shooterSpeed = 3400;
     public static final double kF = 0;
 
 }

@@ -32,7 +32,7 @@ public class ShootVelocity extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Subsystem.setVelocity(m_target * 4096 / 600);
+    m_Subsystem.setVelocity(m_target);
   }
 
   // Called once the command ends or is interrupted.

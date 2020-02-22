@@ -18,6 +18,7 @@ import frc.robot.commands.CollectorUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.FlipCommand;
 import frc.robot.commands.Limelight;
+import frc.robot.commands.ShootVelocity;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.commands.TransferCommand;
@@ -87,9 +88,13 @@ public class RobotContainer {
                 // //
                 // .whenPressed(new AutoTurn(m_driveTrain, 90));
 
+                // new JoystickButton(m_XBoxController, 2)
+                // //
+                // .toggleWhenPressed(new ShootingCommand(m_Shooter, -.5));
+
                 new JoystickButton(m_XBoxController, 2)
                                 //
-                                .toggleWhenPressed(new ShootingCommand(m_Shooter, -.5));
+                                .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeed));
 
                 new JoystickButton(m_joystickRight, 2)
                                 //

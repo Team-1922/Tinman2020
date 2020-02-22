@@ -76,21 +76,30 @@ public class DriveTrain extends SubsystemBase {
     SmartDashboard.putNumber("LimelightArea", area);
   }
 
-  public void setFlip(boolean f){
+  public void setFlip(boolean f) {
     isFlipped = f;
   }
-  public boolean getFLip(){
+
+  public boolean getFLip() {
     return isFlipped;
   }
-  public void toggleFlip(){
+
+  public void toggleFlip() {
     isFlipped = !isFlipped;
   }
 
-  public double getLeftEncoder(){
+  public double getLeftEncoder() {
     return frontLeft.getSensorCollection().getQuadraturePosition();
   }
-  public double getRightEncoder(){
+
+  public double getRightEncoder() {
     return frontRight.getSensorCollection().getQuadraturePosition();
+  }
+
+  public void setLimelightLight(int state) {
+    // 1 off
+    // 3 on
+    table.getEntry("ledMode").setNumber(state);
   }
 
 }
