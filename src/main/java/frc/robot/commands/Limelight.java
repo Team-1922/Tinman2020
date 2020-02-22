@@ -58,7 +58,7 @@ public class Limelight extends CommandBase {
     } else if (responce > .5) {
       responce = .5;
     }
-    m_DriveTrain.drive(-responce + m_leftStick.getY(), responce + m_rightStick.getY(), m_DriveTrain.getFLip());
+    m_DriveTrain.drive(-responce + m_leftStick.getY(), responce + m_rightStick.getY());
     SmartDashboard.putNumber("error", error);
     SmartDashboard.putNumber("center", center);
     SmartDashboard.putNumber("responce", responce);

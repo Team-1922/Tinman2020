@@ -50,8 +50,8 @@ public class DriveTrain extends SubsystemBase {
     rearLeft.setInverted(InvertType.FollowMaster);
   }
 
-  public void drive(double left, double right, boolean flipped) {
-    if (flipped) {
+  public void drive(double left, double right) {
+    if (getFLip()) {
       frontLeft.set(-left);
       frontRight.set(right);
     } else {

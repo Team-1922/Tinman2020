@@ -50,10 +50,15 @@ public final class Constants {
     public static final int shooterRight = 11;
 
     // pneumatics
-    // public static final int collectorRight = 0;
+    public static final int kickerSolenoid = 0;
     public static final int tensioner = 1;
     public static final int hood = 2;
     public static final int collectorP = 3;
     
+    
+
+    // speeds
+    public static final int shooterSpeed = 3400;
+    public static final double kF = 0;
 
 }

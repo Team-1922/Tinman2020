@@ -20,11 +20,12 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
     private WPI_TalonFX shooterLeft = new WPI_TalonFX(Constants.shooterLeft);
     private WPI_TalonFX shooterRight = new WPI_TalonFX(Constants.shooterRight);
-    
+
     private Solenoid hoodSolenoid;
     private Solenoid tensionerSolenoid;
     // private WPI_TalonFX shooterLeft = new WPI_TalonFX(Constants.shooterLeft);
     // private WPI_TalonFX shooterRight = new WPI_TalonFX(Constants.shooterRight);
+    private Solenoid kickerSolenoid;
 
     public Shooter() {
         super();
@@ -33,6 +34,7 @@ public class Shooter extends SubsystemBase {
         shooterRight.setInverted(true);
         hoodSolenoid = new Solenoid(Constants.hood);
         tensionerSolenoid = new Solenoid(Constants.tensioner);
+        kickerSolenoid = new Solenoid(Constants.kickerSolenoid);
         tensionerSolenoid.set(true);
     }
 
@@ -54,7 +56,21 @@ public class Shooter extends SubsystemBase {
         hoodSolenoid.set(false);
 
     }
-    public void toggleHood(){
+
+    public void toggleHood() {
         hoodSolenoid.set(!hoodSolenoid.get());
     }
+
+    public void kickerUp() {
+        kickerSolenoid.set(true);
+    }
+
+    public void kickerDown() {
+        kickerSolenoid.set(false);
+    }
+
+    public void kickerToggle() {
+
+    }
+
 }
