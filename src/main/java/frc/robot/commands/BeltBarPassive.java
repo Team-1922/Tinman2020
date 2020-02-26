@@ -13,17 +13,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BeltBar;
 
 public class BeltBarPassive extends CommandBase {
-  private BeltBar m_BeltBar;
+  private BeltBar m_beltbar;
   private XboxController m_xbox;
 
   /**
    * Creates a new BeltBarPassive.
    */
   public BeltBarPassive(BeltBar beltBar, XboxController xbox) {
-    m_BeltBar = beltBar;
+    m_beltbar = beltBar;
     m_xbox = xbox;
-    addRequirements(m_BeltBar);
-
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -35,7 +33,7 @@ public class BeltBarPassive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_BeltBar.drive(m_xbox.getY(Hand.kRight));
+    m_beltbar.drive(m_xbox.getY(Hand.kRight));
   }
 
   // Called once the command ends or is interrupted.

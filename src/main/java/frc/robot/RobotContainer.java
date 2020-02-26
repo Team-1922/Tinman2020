@@ -13,15 +13,19 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autocommands.AutoTurn;
+import frc.robot.commands.BeltBarPassive;
 import frc.robot.commands.CollectorDown;
+import frc.robot.commands.CollectorPassive;
 import frc.robot.commands.CollectorUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.FlipCommand;
 import frc.robot.commands.Limelight;
+import frc.robot.commands.LinearPassive;
 import frc.robot.commands.ShootVelocity;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.commands.TransferCommand;
+import frc.robot.subsystems.BeltBar;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LinearTransfer;
@@ -40,6 +44,7 @@ public class RobotContainer {
         private final Shooter m_Shooter = new Shooter();
         private final LinearTransfer m_lTransfer = new LinearTransfer();
         private final Collector m_Collector = new Collector();
+        private final BeltBar m_BeltBar = new BeltBar();
 
         private final Joystick m_joystickLeft = new Joystick(1);
         private final Joystick m_joystickRight = new Joystick(0);
@@ -48,9 +53,7 @@ public class RobotContainer {
 
         private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft,
                         m_joystickRight);
-        private final TransferCommand m_TransferPassive = new TransferCommand(m_lTransfer, 0);
-        private final CollectorUp m_CollectorUp = new CollectorUp(m_Collector);
-        private final ShootingCommand m_ShootingCommand = new ShootingCommand(m_Shooter, 0);
+        private final ShootingCommand m_ShootStop = new ShootingCommand(m_Shooter, 0);
         // private final CollectorDown m_CollectorDown =
         // private final DriveStraightAuto m_autoCommand = new
         // DriveStraightAuto(m_driveTrain, .2, 2);
@@ -64,9 +67,11 @@ public class RobotContainer {
                 // Configure the button bindings
                 configureButtonBindings();
                 m_driveTrain.setDefaultCommand(m_TankDrive);
-                m_lTransfer.setDefaultCommand(m_TransferPassive);
-                m_Collector.setDefaultCommand(m_CollectorUp);
-                m_Shooter.setDefaultCommand(m_ShootingCommand);
+                m_lTransfer.setDefaultCommand(new LinearPassive(m_lTransfer, m_XBoxController));
+                m_Collector.setDefaultCommand(new CollectorPassive(m_Collector, m_XBoxController));
+                m_BeltBar.setDefaultCommand(new BeltBarPassive(m_BeltBar, m_XBoxController));
+                m_Shooter.setDefaultCommand(m_ShootStop);
+                
         }
 
         /**
