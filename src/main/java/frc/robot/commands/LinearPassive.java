@@ -7,31 +7,33 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.LinearTransfer;
 
-public class CollectorUp extends CommandBase {
-  private Collector m_subsystem;
+public class LinearPassive extends CommandBase {
+  private LinearTransfer m_linearTransfer;
+  private XboxController m_xbox;
   /**
    * Creates a new CollectorPassive.
    */
-  public CollectorUp(Collector subsystem) {
-    m_subsystem = subsystem;
-    addRequirements(m_subsystem);
-    // Use addRequirements() here to declare subsystem dependencies.
+  public LinearPassive(LinearTransfer lTransfer, XboxController xbox) {
+    m_linearTransfer = lTransfer;
+    m_xbox = xbox;
+
+    addRequirements(m_linearTransfer);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.ToggleCollector();
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.drive(0);
+    m_linearTransfer.drive(m_xbox.getY(Hand.kRight));
   }
 
   // Called once the command ends or is interrupted.

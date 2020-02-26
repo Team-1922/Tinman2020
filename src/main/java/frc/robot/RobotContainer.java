@@ -99,6 +99,9 @@ public class RobotContainer {
                 new JoystickButton(m_joystickRight, 2)
                                 //
                                 .toggleWhenPressed(new CollectorDown(m_Collector, .5));
+                                new JoystickButton(m_XBoxController, 4)
+                                //
+                                .toggleWhenPressed(new CollectorUp(m_Collector));
 
                 new JoystickButton(m_XBoxController, 3)
                                 //

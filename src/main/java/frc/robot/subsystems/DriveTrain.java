@@ -40,6 +40,8 @@ public class DriveTrain extends SubsystemBase {
   private double area = ta.getDouble(0.0);
   private boolean isFlipped = false;
 
+
+
   public DriveTrain() {
     super();
     rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
@@ -59,7 +61,10 @@ public class DriveTrain extends SubsystemBase {
       frontRight.set(-right);
     }
 
+SmartDashboard.putNumber("gyro debug", ahrs.getAngle());
+
   }
+
 
   public double getAngle() {
     return ahrs.getAngle();

@@ -7,31 +7,35 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.BeltBar;
 
-public class CollectorUp extends CommandBase {
-  private Collector m_subsystem;
+public class BeltBarPassive extends CommandBase {
+  private BeltBar m_BeltBar;
+  private XboxController m_xbox;
+
   /**
-   * Creates a new CollectorPassive.
+   * Creates a new BeltBarPassive.
    */
-  public CollectorUp(Collector subsystem) {
-    m_subsystem = subsystem;
-    addRequirements(m_subsystem);
+  public BeltBarPassive(BeltBar beltBar, XboxController xbox) {
+    m_BeltBar = beltBar;
+    m_xbox = xbox;
+    addRequirements(m_BeltBar);
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.ToggleCollector();
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.drive(0);
+    m_BeltBar.drive(m_xbox.getY(Hand.kRight));
   }
 
   // Called once the command ends or is interrupted.

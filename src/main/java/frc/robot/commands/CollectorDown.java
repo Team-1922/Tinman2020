@@ -26,7 +26,8 @@ public class CollectorDown extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.CollectorDown();
+    //m_subsystem.CollectorDown();
+   // m_subsystem.ToggleCollector();
     
   }
 

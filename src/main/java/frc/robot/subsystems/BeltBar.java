@@ -15,22 +15,22 @@ import frc.robot.Constants;
 /**
  * Add your docs here.
  */
-public class LinearTransfer extends SubsystemBase {
-  private WPI_TalonSRX linearTransfer = new WPI_TalonSRX(Constants.linearTransfer);
-  // private WPI_TalonSRX linearIntake = new WPI_TalonSRX(Constants.linearIntake);
+public class BeltBar extends SubsystemBase {
+    private WPI_TalonSRX beltBarLeft = new WPI_TalonSRX(Constants.beltBarLeft);
+    private WPI_TalonSRX beltBarRight = new WPI_TalonSRX(Constants.beltBarRight);
 
-  public LinearTransfer() {
-    super();
-    // linearIntake.set(ControlMode.Follower, linearTransfer.getDeviceID());
-  }
+    public BeltBar() {
+        super();
 
-  public void drive(double speed) {
-    linearTransfer.set(speed);
-    
-  }
+    }
 
-  public int getEncoders() {
-    return linearTransfer.getSensorCollection().getQuadraturePosition();
-  }
+    public void drive(double speed) {
+        beltBarLeft.set(-speed);
+        beltBarRight.set(-speed);
+    }
 
+    public void vibe() {
+        // you already vibin
+        // wowow
+    }
 }

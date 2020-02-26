@@ -21,7 +21,7 @@ public class AutoTurn extends CommandBase {
   double p = .006;
   double d = 0.0001;
   double derivative;
-  boolean isNegative = false;
+  boolean isPositive = true;
 
   /**
    * Turns the robot an X amount of degrees
@@ -38,9 +38,9 @@ public class AutoTurn extends CommandBase {
   public void initialize() {
     initAngle = m_driveTrain.getAngle();
     if (m_angle < 0) {
-      isNegative = true;
+      isPositive = false;
     } else {
-      isNegative = false;
+      isPositive = true;
     }
 
   }
@@ -48,12 +48,12 @@ public class AutoTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    error = initAngle - (m_driveTrain.getAngle()) + m_angle;
+    error = initAngle - (m_driveTrain.getAngle() + m_angle);
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
-    if (responce <= minimumResponse && isNegative == false) {
+    if (responce <= minimumResponse && isPositive == true) {
       responce = minimumResponse;
-    } else if (responce >= minimumResponse && isNegative == true) {
+    } else if (responce >= minimumResponse && isPositive == false) {
       responce = -minimumResponse;
     }
     m_driveTrain.drive(responce, -responce);
@@ -70,12 +70,12 @@ public class AutoTurn extends CommandBase {
   @Override
   public boolean isFinished() {
 
-    if (isNegative) {
+    if (isPositive) {
       return (initAngle + m_angle + 5) >= m_driveTrain.getAngle();
       
     } else {
       return (initAngle + m_angle - 5) <= m_driveTrain.getAngle();
     }
-    // return false;
+    
   }
 }
