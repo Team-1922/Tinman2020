@@ -7,30 +7,21 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
  * Add your docs here.
  */
-public class BeltBar extends SubsystemBase {
-    private WPI_TalonSRX beltBarLeft = new WPI_TalonSRX(Constants.beltBarLeft);
-    private WPI_TalonSRX beltBarRight = new WPI_TalonSRX(Constants.beltBarRight);
-
-    public BeltBar() {
+public class KickerPneumatics extends SubsystemBase {
+    private Solenoid m_kicker;
+    public KickerPneumatics() {
         super();
-        
+        m_kicker = new Solenoid(Constants.kickerSolenoid);
     }
 
-    public void drive(double speed) {
-        beltBarLeft.set(-speed);
-        beltBarRight.set(-speed);
-    }
-
-    public void vibe() {
-        // you already vibin
-        // wowow
+    public void kick(boolean state){
+        m_kicker.set(state);
     }
 }

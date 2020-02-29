@@ -26,6 +26,8 @@ import frc.robot.Constants;
 public class DriveTrain extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+
+  //objects
   private WPI_TalonSRX frontLeft = new WPI_TalonSRX(Constants.frontLeft);
   private WPI_TalonSRX rearLeft = new WPI_TalonSRX(Constants.rearLeft);
   private WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.frontRight);
@@ -44,8 +46,11 @@ public class DriveTrain extends SubsystemBase {
 
   public DriveTrain() {
     super();
+
+    //configuring talons
     rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
     rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
+
     frontRight.setInverted(true);
     rearRight.setInverted(InvertType.FollowMaster);
     frontLeft.setInverted(true);
@@ -61,7 +66,7 @@ public class DriveTrain extends SubsystemBase {
       frontRight.set(-right);
     }
 
-SmartDashboard.putNumber("gyro debug", ahrs.getAngle());
+// SmartDashboard.putNumber("gyro debug", ahrs.getAngle());
 
   }
 

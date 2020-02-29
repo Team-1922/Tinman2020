@@ -7,42 +7,34 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BeltBar;
+import frc.robot.subsystems.KickerPneumatics;
 
-public class BeltBarPassive extends CommandBase {
-  private BeltBar m_beltbar;
-  private XboxController m_xbox;
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
+public class TriggerKicker extends CommandBase {
+  private KickerPneumatics m_subsystem;
+  private boolean m_state;
 
-  /**
-   * Creates a new BeltBarPassive.
-   */
-  public BeltBarPassive(BeltBar beltBar, XboxController xbox) {
-    m_beltbar = beltBar;
-    m_xbox = xbox;
-    addRequirements(m_beltbar);
+  public TriggerKicker(KickerPneumatics subsystem, boolean state) {
+    m_subsystem = subsystem;
+    m_state = state;
+    addRequirements(m_subsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_subsystem.kick(m_state);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_beltbar.drive(m_xbox.getY(Hand.kRight));
+
   }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
-
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

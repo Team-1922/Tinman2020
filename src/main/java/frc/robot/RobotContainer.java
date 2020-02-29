@@ -19,15 +19,18 @@ import frc.robot.commands.CollectorPassive;
 import frc.robot.commands.CollectorUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.FlipCommand;
+import frc.robot.commands.KickerPassive;
 import frc.robot.commands.Limelight;
 import frc.robot.commands.LinearPassive;
-import frc.robot.commands.ShootVelocity;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
+import frc.robot.commands.ToggleHood;
 import frc.robot.commands.TransferCommand;
+import frc.robot.commands.TriggerKicker;
 import frc.robot.subsystems.BeltBar;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.KickerPneumatics;
 import frc.robot.subsystems.LinearTransfer;
 import frc.robot.subsystems.Shooter;
 
@@ -40,17 +43,23 @@ import frc.robot.subsystems.Shooter;
  */
 public class RobotContainer {
         // The robot's subsystems and commands are defined here...
+
+        // subsytems
         private final DriveTrain m_driveTrain = new DriveTrain();
         private final Shooter m_Shooter = new Shooter();
         private final LinearTransfer m_lTransfer = new LinearTransfer();
         private final Collector m_Collector = new Collector();
         private final BeltBar m_BeltBar = new BeltBar();
+        private final KickerPneumatics m_kickerPneumatics = new KickerPneumatics();
 
+        // joysticks
         private final Joystick m_joystickLeft = new Joystick(1);
         private final Joystick m_joystickRight = new Joystick(0);
 
+        // controller
         private final XboxController m_XBoxController = new XboxController(2);
 
+        // pre-generated commands
         private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft,
                         m_joystickRight);
         private final ShootingCommand m_ShootStop = new ShootingCommand(m_Shooter, 0);
@@ -65,13 +74,15 @@ public class RobotContainer {
          */
         public RobotContainer() {
                 // Configure the button bindings
+                // default commands
                 configureButtonBindings();
                 m_driveTrain.setDefaultCommand(m_TankDrive);
                 m_lTransfer.setDefaultCommand(new LinearPassive(m_lTransfer, m_XBoxController));
                 m_Collector.setDefaultCommand(new CollectorPassive(m_Collector, m_XBoxController));
                 m_BeltBar.setDefaultCommand(new BeltBarPassive(m_BeltBar, m_XBoxController));
                 m_Shooter.setDefaultCommand(m_ShootStop);
-                
+                m_kickerPneumatics.setDefaultCommand(new KickerPassive(m_kickerPneumatics));
+
         }
 
         /**
@@ -85,26 +96,15 @@ public class RobotContainer {
                                 //
                                 .whileHeld(new DriveStraight(m_driveTrain, m_joystickLeft, m_joystickRight));
 
-                // new JoystickButton(m_joystickLeft, 3)
-                // //
-                // .whenPressed(new AutoTurn(m_driveTrain, -90));
-
-                // new JoystickButton(m_joystickLeft, 4)
-                // //
-                // .whenPressed(new AutoTurn(m_driveTrain, 90));
-
                 // new JoystickButton(m_XBoxController, 2)
                 // //
-                // .toggleWhenPressed(new ShootingCommand(m_Shooter, -.5));
+                // .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeed));
 
                 new JoystickButton(m_XBoxController, 2)
                                 //
-                                .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeed));
+                                .toggleWhenPressed(new ShootingCommand(m_Shooter, .45));
 
-                new JoystickButton(m_joystickRight, 2)
-                                //
-                                .toggleWhenPressed(new CollectorDown(m_Collector, .5));
-                                new JoystickButton(m_XBoxController, 4)
+                new JoystickButton(m_XBoxController, 4)
                                 //
                                 .toggleWhenPressed(new CollectorUp(m_Collector));
 
@@ -126,6 +126,13 @@ public class RobotContainer {
                 new JoystickButton(m_joystickRight, 4)
                                 //
                                 .whenPressed(new FlipCommand(m_driveTrain));
+                new JoystickButton(m_XBoxController, 1)
+                                //
+                                .whileHeld(new TriggerKicker(m_kickerPneumatics, true));
+
+                new JoystickButton(m_XBoxController, 8)
+                                //
+                                .whenPressed(new ToggleHood(m_Shooter));
         }
 
         /**

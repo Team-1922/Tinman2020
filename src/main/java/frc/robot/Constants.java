@@ -46,17 +46,15 @@ public final class Constants {
     public static final int rearRight = 6;
     public static final int frontRight = 7;
     public static final int kickerMotor = 8;
-    public static final int linearIntake = 9;
+    public static final int unused = 9;
     public static final int shooterLeft = 10;
     public static final int shooterRight = 11;
 
     // pneumatics
-    public static final int kickerSolenoid = 6;
-    public static final int tensioner = 1;
+    public static final int kickerSolenoid = 1;
+    public static final int tensioner = 2;
     public static final int hood = 0;
     public static final int collectorP = 3;
-    public static final int collectorP2 = 2;
-    
     
 
     // speeds

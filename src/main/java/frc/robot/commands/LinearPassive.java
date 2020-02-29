@@ -33,7 +33,7 @@ public class LinearPassive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_linearTransfer.drive(m_xbox.getY(Hand.kRight));
+    m_linearTransfer.drive(-m_xbox.getY(Hand.kRight));
   }
 
   // Called once the command ends or is interrupted.
