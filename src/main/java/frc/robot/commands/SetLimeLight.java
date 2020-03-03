@@ -29,6 +29,7 @@ public class SetLimeLight extends InstantCommand {
     
     if (m_light){
       m_DriveTrain.setLimelightLight(3);
+      
     } else {
       m_DriveTrain.setLimelightLight(1);
     }

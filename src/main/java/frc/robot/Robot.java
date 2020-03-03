@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    System.out.println("Robot Disabled");
   }
 
   @Override
@@ -103,6 +104,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    System.out.println("Robot Enabled");
   }
 
   /**

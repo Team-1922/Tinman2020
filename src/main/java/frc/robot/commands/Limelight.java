@@ -36,12 +36,14 @@ public class Limelight extends CommandBase {
     addRequirements(m_DriveTrain);
 
     // Use addRequirements() here to declare subsystem dependencies.
+    m_DriveTrain.setLimelightMode(1);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_DriveTrain.setLimelightLight(3);
+    m_DriveTrain.setLimelightMode(0);
 
   }
 
@@ -71,6 +73,7 @@ public class Limelight extends CommandBase {
   @Override
   public void end(final boolean interrupted) {
     m_DriveTrain.setLimelightLight(1);
+    m_DriveTrain.setLimelightMode(1);
   }
 
   // Returns true when the command should end.

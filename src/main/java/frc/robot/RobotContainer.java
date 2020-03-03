@@ -22,6 +22,7 @@ import frc.robot.commands.FlipCommand;
 import frc.robot.commands.KickerPassive;
 import frc.robot.commands.Limelight;
 import frc.robot.commands.LinearPassive;
+import frc.robot.commands.ShootVelocity;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.commands.ToggleHood;
@@ -92,46 +93,49 @@ public class RobotContainer {
          * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
          */
         private void configureButtonBindings() {
-                new JoystickButton(m_joystickLeft, 1)
-                                //
+                new JoystickButton(m_joystickLeft, Constants.trigger)
+                                // Drive Straight
                                 .whileHeld(new DriveStraight(m_driveTrain, m_joystickLeft, m_joystickRight));
 
-                // new JoystickButton(m_XBoxController, 2)
-                // //
-                // .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeed));
-
-                new JoystickButton(m_XBoxController, 2)
-                                //
-                                .toggleWhenPressed(new ShootingCommand(m_Shooter, .45));
-
-                new JoystickButton(m_XBoxController, 4)
-                                //
-                                .toggleWhenPressed(new CollectorUp(m_Collector));
-
-                new JoystickButton(m_XBoxController, 3)
-                                //
-                                .toggleWhenPressed(new CollectorDown(m_Collector, .5));
-
-                new JoystickButton(m_XBoxController, 5)
-                                //
-                                .whileHeld(new TransferCommand(m_lTransfer, .5));
-
-                new JoystickButton(m_XBoxController, 6)
-                                //
-                                .whileHeld(new TransferCommand(m_lTransfer, -.4));
-
-                new JoystickButton(m_joystickRight, 1)
-                                //
-                                .whileHeld(new Limelight(m_driveTrain, m_joystickLeft, m_joystickRight));
-                new JoystickButton(m_joystickRight, 4)
-                                //
-                                .whenPressed(new FlipCommand(m_driveTrain));
-                new JoystickButton(m_XBoxController, 1)
-                                //
+                new JoystickButton(m_XBoxController, Constants.a)
+                                // Trigger Kicker
                                 .whileHeld(new TriggerKicker(m_kickerPneumatics, true));
 
+                new JoystickButton(m_XBoxController, Constants.b)
+                                // Shoot Velocity
+                                .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeed));
+
+                // new JoystickButton(m_XBoxController, Constants.b)
+                // Shoot
+                // .toggleWhenPressed(new ShootingCommand(m_Shooter, .45));
+
+                new JoystickButton(m_XBoxController, Constants.y)
+                                // Collector Up
+                                .toggleWhenPressed(new CollectorUp(m_Collector));
+
+                new JoystickButton(m_XBoxController, Constants.x)
+                                // Collector Down
+                                .toggleWhenPressed(new CollectorDown(m_Collector, .5));
+
+                new JoystickButton(m_XBoxController, Constants.lb)
+                                // Run Transfer forward
+                                .whileHeld(new TransferCommand(m_lTransfer, .5));
+
+                new JoystickButton(m_XBoxController, Constants.rb)
+                                // Run Transfer backward
+                                .whileHeld(new TransferCommand(m_lTransfer, -.4));
+
+                new JoystickButton(m_joystickRight, Constants.trigger)
+                                // Limelight
+                                .whileHeld(new Limelight(m_driveTrain, m_joystickLeft, m_joystickRight));
+
+                new JoystickButton(m_joystickRight, 4)
+                                // Flip Robot
+                                .whenPressed(new FlipCommand(m_driveTrain));
+
                 new JoystickButton(m_XBoxController, 8)
-                                //
+                                // legacy to be deleted
+                                // toggle hood
                                 .whenPressed(new ToggleHood(m_Shooter));
         }
 

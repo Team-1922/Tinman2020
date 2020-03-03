@@ -32,28 +32,37 @@ public class Shooter extends SubsystemBase {
         shooterRight.set(ControlMode.Follower, shooterLeft.getDeviceID());
         shooterLeft.setInverted(false);
         shooterRight.setInverted(true);
+        shooterRight.setSensorPhase(true);
+        shooterLeft.setSensorPhase(true);
         hoodSolenoid = new Solenoid(Constants.hood);
         tensionerSolenoid = new Solenoid(Constants.tensioner);
-        // kickerSolenoid = new Solenoid(Constants.kickerSolenoid);
         tensionerSolenoid.set(true);
+        kickerMotor.setInverted(true);
     }
 
-    public void shoot(double speed) {
-        shooterLeft.set(speed);
-        if (speed != 0.0) {
-            kickerMotor.set(-.65);
-        } else {
-            kickerMotor.set(0.0);
-        }
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Left Temp", shooterLeft.getTemperature());
+        SmartDashboard.putNumber("Right Temp", shooterRight.getTemperature());
 
-        SmartDashboard.putNumber("Shooter Velocity", getVelocity());
-
-        if(getVelocity() >= -3000){
+        if (getVelocity() >= Constants.shooterSpeed - 200) {
             SmartDashboard.putBoolean("Up To Speed", true);
         } else {
             SmartDashboard.putBoolean("Up To Speed", false);
         }
 
+        SmartDashboard.putNumber("Shooter Velocity", getVelocity());
+    }
+
+    public void shoot(double speed) {
+        shooterLeft.set(speed);
+        if (speed != 0.0) {
+            kickerMotor.set(.65);
+        } else {
+            kickerMotor.set(0.0);
+        }
+
+        
     }
 
     public void runKicker(double speed) {
@@ -62,7 +71,7 @@ public class Shooter extends SubsystemBase {
 
     public void setVelocity(double speed) {
         shooterLeft.set(ControlMode.Velocity, speed * 4096 / 600);
-        kickerMotor.set(-.65);
+        kickerMotor.set(.65);
     }
 
     public void hoodUp() {
@@ -77,7 +86,7 @@ public class Shooter extends SubsystemBase {
         hoodSolenoid.set(!hoodSolenoid.get());
     }
 
-    public double getVelocity(){
+    public double getVelocity() {
         return shooterLeft.getSelectedSensorVelocity();
     }
 

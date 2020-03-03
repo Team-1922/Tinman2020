@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -46,8 +47,11 @@ public class DriveStraight extends CommandBase {
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
     double RawY = (m_joystickLeft.getY() + m_joystickRight.getY()) / 2;
-    m_driveTrain.drive(-RawY + responce, -RawY - responce);
+    m_driveTrain.drive(-RawY - responce, -RawY + responce);
     errorPrior = error;
+
+    SmartDashboard.putNumber("DS error", error);
+    SmartDashboard.putNumber("DS responce", responce);
   }
 
   // Called once the command ends or is interrupted.

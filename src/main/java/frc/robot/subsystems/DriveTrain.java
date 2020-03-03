@@ -27,7 +27,7 @@ public class DriveTrain extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  //objects
+  // objects
   private WPI_TalonSRX frontLeft = new WPI_TalonSRX(Constants.frontLeft);
   private WPI_TalonSRX rearLeft = new WPI_TalonSRX(Constants.rearLeft);
   private WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.frontRight);
@@ -42,16 +42,14 @@ public class DriveTrain extends SubsystemBase {
   private double area = ta.getDouble(0.0);
   private boolean isFlipped = false;
 
-
-
   public DriveTrain() {
     super();
 
-    //configuring talons
+    // configuring talons
     rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
     rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
 
-    frontRight.setInverted(true);
+    frontRight.setInverted(false);
     rearRight.setInverted(InvertType.FollowMaster);
     frontLeft.setInverted(true);
     rearLeft.setInverted(InvertType.FollowMaster);
@@ -59,17 +57,16 @@ public class DriveTrain extends SubsystemBase {
 
   public void drive(double left, double right) {
     if (getFLip()) {
-      frontLeft.set(-left);
-      frontRight.set(right);
+      frontLeft.set(-right);
+      frontRight.set(-left);
     } else {
       frontLeft.set(left);
-      frontRight.set(-right);
+      frontRight.set(right);
     }
 
-// SmartDashboard.putNumber("gyro debug", ahrs.getAngle());
+    // SmartDashboard.putNumber("gyro debug", ahrs.getAngle());
 
   }
-
 
   public double getAngle() {
     return ahrs.getAngle();
@@ -110,6 +107,10 @@ public class DriveTrain extends SubsystemBase {
     // 1 off
     // 3 on
     table.getEntry("ledMode").setNumber(state);
+  }
+
+  public void setLimelightMode(int state) {
+    table.getEntry("camMode").setNumber(state);
   }
 
 }
