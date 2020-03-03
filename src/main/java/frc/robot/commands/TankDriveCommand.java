@@ -8,7 +8,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -31,6 +30,7 @@ public class TankDriveCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_driveTrain.setLimelightMode(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -38,8 +38,8 @@ public class TankDriveCommand extends CommandBase {
   public void execute() {
     m_driveTrain.drive(-m_joystickLeft.getY(), -m_joystickRight.getY());
 
-    SmartDashboard.putNumber("LeftEncoder", m_driveTrain.getLeftEncoder());
-    SmartDashboard.putNumber("RightEncoder", m_driveTrain.getRightEncoder());
+    // SmartDashboard.putNumber("LeftEncoder", m_driveTrain.getLeftEncoder());
+    // SmartDashboard.putNumber("RightEncoder", m_driveTrain.getRightEncoder());
     // m_driveTrain.drive(-m_joystickLeft.getThrottle(), -m_joystickRight.getThrottle());
   }
 

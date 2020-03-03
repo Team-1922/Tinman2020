@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autocommands.AutoTurn;
 import frc.robot.commands.BeltBarPassive;
-import frc.robot.commands.CollectorDown;
 import frc.robot.commands.CollectorPassive;
-import frc.robot.commands.CollectorUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.FlipCommand;
 import frc.robot.commands.KickerPassive;
@@ -25,7 +23,7 @@ import frc.robot.commands.LinearPassive;
 import frc.robot.commands.ShootVelocity;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
-import frc.robot.commands.ToggleHood;
+import frc.robot.commands.ToggleCollector;
 import frc.robot.commands.TransferCommand;
 import frc.robot.commands.TriggerKicker;
 import frc.robot.subsystems.BeltBar;
@@ -103,19 +101,24 @@ public class RobotContainer {
 
                 new JoystickButton(m_XBoxController, Constants.b)
                                 // Shoot Velocity
-                                .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeed));
+                                .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeedHigh));
+                new JoystickButton(m_XBoxController, Constants.y)
+                                // Shoot Velocity
+                                .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeedMid));
+                new JoystickButton(m_XBoxController, Constants.x)
+                                // Shoot Velocity
+                                .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeedLow));
 
+                new JoystickButton(m_XBoxController, 7)
+                                // Shoot Velocity
+                                .toggleWhenPressed(new ShootingCommand(m_Shooter, 0));
                 // new JoystickButton(m_XBoxController, Constants.b)
-                // Shoot
+                // Shoot percent
                 // .toggleWhenPressed(new ShootingCommand(m_Shooter, .45));
 
-                new JoystickButton(m_XBoxController, Constants.y)
-                                // Collector Up
-                                .toggleWhenPressed(new CollectorUp(m_Collector));
-
-                new JoystickButton(m_XBoxController, Constants.x)
-                                // Collector Down
-                                .toggleWhenPressed(new CollectorDown(m_Collector, .5));
+                new JoystickButton(m_joystickRight, Constants.thumbButton)
+                                // toggle collector
+                                .whenPressed(new ToggleCollector(m_Collector));
 
                 new JoystickButton(m_XBoxController, Constants.lb)
                                 // Run Transfer forward
@@ -132,11 +135,6 @@ public class RobotContainer {
                 new JoystickButton(m_joystickRight, 4)
                                 // Flip Robot
                                 .whenPressed(new FlipCommand(m_driveTrain));
-
-                new JoystickButton(m_XBoxController, 8)
-                                // legacy to be deleted
-                                // toggle hood
-                                .whenPressed(new ToggleHood(m_Shooter));
         }
 
         /**

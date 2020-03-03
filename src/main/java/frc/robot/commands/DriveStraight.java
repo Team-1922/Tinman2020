@@ -19,6 +19,9 @@ public class DriveStraight extends CommandBase {
   private DriveTrain m_driveTrain;
   private Joystick m_joystickRight;
   private Joystick m_joystickLeft;
+  double p = .02;
+  double d = 0.0001;
+  double derivative;
 
   /**
    * Hold the button and it doesn't rotate
@@ -39,15 +42,23 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double p = .02;
-    double d = 0.0001;
-    double derivative;
+    
+    if (m_driveTrain.getFLip()) {
+      error = initAngle - (m_driveTrain.getAngle() + 180);
+    } else {
+      error = initAngle - m_driveTrain.getAngle();
+    }
 
-    error = initAngle - m_driveTrain.getAngle();
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
     double RawY = (m_joystickLeft.getY() + m_joystickRight.getY()) / 2;
-    m_driveTrain.drive(-RawY - responce, -RawY + responce);
+    
+    if (m_driveTrain.getFLip()) {
+      m_driveTrain.drive(RawY - responce, RawY + responce);
+    } else {
+      m_driveTrain.drive(-RawY - responce, -RawY + responce);
+    }
+
     errorPrior = error;
 
     SmartDashboard.putNumber("DS error", error);

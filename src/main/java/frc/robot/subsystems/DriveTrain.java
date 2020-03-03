@@ -102,7 +102,10 @@ public class DriveTrain extends SubsystemBase {
   public double getRightEncoder() {
     return frontRight.getSensorCollection().getQuadraturePosition();
   }
-
+/**
+ * @param state State of the light
+ *
+ */
   public void setLimelightLight(int state) {
     // 1 off
     // 3 on

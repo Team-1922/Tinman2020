@@ -27,6 +27,8 @@ public class Shooter extends SubsystemBase {
     private Solenoid hoodSolenoid;
     private Solenoid tensionerSolenoid;
 
+    private double targetSpeed = Constants.shooterSpeedLow;
+
     public Shooter() {
         super();
         shooterRight.set(ControlMode.Follower, shooterLeft.getDeviceID());
@@ -45,7 +47,7 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("Left Temp", shooterLeft.getTemperature());
         SmartDashboard.putNumber("Right Temp", shooterRight.getTemperature());
 
-        if (getVelocity() >= Constants.shooterSpeed - 200) {
+        if (getVelocity() >= targetSpeed - 200) {
             SmartDashboard.putBoolean("Up To Speed", true);
         } else {
             SmartDashboard.putBoolean("Up To Speed", false);
@@ -88,6 +90,14 @@ public class Shooter extends SubsystemBase {
 
     public double getVelocity() {
         return shooterLeft.getSelectedSensorVelocity();
+    }
+
+    public double getTargetSpeed() {
+        return targetSpeed;
+    }
+
+    public void setTargetSpeed(double targetSpeed) {
+        this.targetSpeed = targetSpeed;
     }
 
 }

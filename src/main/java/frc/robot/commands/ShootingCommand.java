@@ -29,7 +29,7 @@ public class ShootingCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    m_shooter.hoodUp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,6 +41,7 @@ public class ShootingCommand extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_shooter.hoodDown();
   }
 
   // Returns true when the command should end.

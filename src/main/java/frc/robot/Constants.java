@@ -58,7 +58,9 @@ public final class Constants {
     
 
     // speeds
-    public static final double shooterSpeed = 1400;
+    public static final double shooterSpeedHigh = 3200;
+    public static final double shooterSpeedMid = 2600;
+    public static final double shooterSpeedLow = 2000;
     public static final double kF = 0;
 
     // xbox
@@ -68,6 +70,7 @@ public final class Constants {
     public static final int y = 4;
     public static final int lb = 5;
     public static final int rb = 6;
+    
 
     // joystick
     public static final int trigger = 1;
