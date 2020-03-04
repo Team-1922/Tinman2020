@@ -13,16 +13,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Collector;
 
 public class CollectorPassive extends CommandBase {
-  private Collector m_Collector;
+  private Collector m_subsystem;
   private XboxController m_xbox;
   /**
    * Creates a new CollectorPassive.
    */
   public CollectorPassive(Collector collector, XboxController xbox) {
-    m_Collector = collector;
+    m_subsystem = collector;
     m_xbox = xbox;
 
-    addRequirements(m_Collector);
+    addRequirements(m_subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,7 +33,7 @@ public class CollectorPassive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Collector.drive(m_xbox.getY(Hand.kRight));
+    m_subsystem.drive(m_xbox.getY(Hand.kRight));
   }
 
   // Called once the command ends or is interrupted.

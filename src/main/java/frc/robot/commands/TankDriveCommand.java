@@ -12,31 +12,31 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class TankDriveCommand extends CommandBase {
-  private DriveTrain m_driveTrain;
+  private DriveTrain m_subsystem;
   private Joystick m_joystickRight;
   private Joystick m_joystickLeft;
 
   /**
    * it do the drive thign
    */
-  public TankDriveCommand(DriveTrain driveTrain, Joystick joystickRight, Joystick joystickLeft) {
-    m_driveTrain = driveTrain;
+  public TankDriveCommand(DriveTrain subsystem, Joystick joystickRight, Joystick joystickLeft) {
+    m_subsystem = subsystem;
     m_joystickLeft = joystickLeft;
     m_joystickRight = joystickRight;
-    addRequirements(m_driveTrain);
+    addRequirements(m_subsystem);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_driveTrain.setLimelightMode(1);
+    m_subsystem.setLimelightMode(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.drive(-m_joystickLeft.getY(), -m_joystickRight.getY());
+    m_subsystem.drive(-m_joystickLeft.getY(), -m_joystickRight.getY());
 
     // SmartDashboard.putNumber("LeftEncoder", m_driveTrain.getLeftEncoder());
     // SmartDashboard.putNumber("RightEncoder", m_driveTrain.getRightEncoder());

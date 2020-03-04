@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveStraightAuto extends CommandBase {
-  private DriveTrain m_driveTrain;
+  private DriveTrain m_subsystem;
   private double m_speed;
   private Timer m_timer;
   private double m_time;
@@ -23,12 +23,12 @@ public class DriveStraightAuto extends CommandBase {
   /**
    * Takes the current angle through the gyroscope, and keep the bot poining in that direction
    */
-  public DriveStraightAuto(DriveTrain driveTrain, double speed, double time) {
-    m_driveTrain = driveTrain;
+  public DriveStraightAuto(DriveTrain subsystem, double speed, double time) {
+    m_subsystem = subsystem;
     m_speed = speed;
     m_timer = new Timer();
     m_time = time;
-    addRequirements(m_driveTrain);
+    addRequirements(m_subsystem);
 
   }
 
@@ -36,7 +36,7 @@ public class DriveStraightAuto extends CommandBase {
   @Override
   public void initialize() {
     m_timer.start();
-    initAngle = m_driveTrain.getAngle();
+    initAngle = m_subsystem.getAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,10 +46,10 @@ public class DriveStraightAuto extends CommandBase {
     double d = 0.0001;
     double derivative;
 
-    error = initAngle - m_driveTrain.getAngle();
+    error = initAngle - m_subsystem.getAngle();
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
-    m_driveTrain.drive(m_speed + responce, m_speed - responce);
+    m_subsystem.drive(m_speed + responce, m_speed - responce);
     errorPrior = error;
   }
 

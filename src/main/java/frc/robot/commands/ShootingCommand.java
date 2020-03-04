@@ -11,37 +11,37 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class ShootingCommand extends CommandBase {
-  private Shooter m_shooter;
+  private Shooter m_subsystem;
   private double m_speed;
 
   /**
    * sets speed of shooter to x
-   * @param shooter The Shooter Subsystem
+   * @param subsystem The Shooter Subsystem
    * @param speed the speed it do
    */
-  public ShootingCommand(Shooter shooter, double speed) {
-    m_shooter = shooter;
+  public ShootingCommand(Shooter subsystem, double speed) {
+    m_subsystem = subsystem;
     m_speed = speed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_shooter);
+    addRequirements(m_subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_shooter.hoodUp();
+    m_subsystem.hoodUp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_shooter.shoot(m_speed);
+    m_subsystem.shoot(m_speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_shooter.hoodDown();
+    m_subsystem.hoodDown();
   }
 
   // Returns true when the command should end.

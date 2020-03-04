@@ -21,7 +21,6 @@ public class BeltBar extends SubsystemBase {
 
     public BeltBar() {
         super();
-        
     }
 
     public void drive(double speed) {

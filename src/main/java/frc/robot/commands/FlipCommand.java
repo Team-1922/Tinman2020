@@ -14,17 +14,17 @@ import frc.robot.subsystems.DriveTrain;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class FlipCommand extends InstantCommand {
-  private DriveTrain m_DriveTrain;
-  public FlipCommand(DriveTrain driveTrain) {
-    m_DriveTrain = driveTrain;
+  private DriveTrain m_subsystem;
+  public FlipCommand(DriveTrain subsystem) {
+    m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_DriveTrain);
+    addRequirements(m_subsystem);
     
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_DriveTrain.toggleFlip();
+    m_subsystem.toggleFlip();
   }
 }

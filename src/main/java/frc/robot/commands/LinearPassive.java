@@ -13,16 +13,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.LinearTransfer;
 
 public class LinearPassive extends CommandBase {
-  private LinearTransfer m_linearTransfer;
+  private LinearTransfer m_subsystem;
   private XboxController m_xbox;
   /**
    * Creates a new CollectorPassive.
    */
-  public LinearPassive(LinearTransfer lTransfer, XboxController xbox) {
-    m_linearTransfer = lTransfer;
+  public LinearPassive(LinearTransfer subsystem, XboxController xbox) {
+    m_subsystem = subsystem;
     m_xbox = xbox;
 
-    addRequirements(m_linearTransfer);
+    addRequirements(m_subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -33,7 +33,7 @@ public class LinearPassive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_linearTransfer.drive(-m_xbox.getY(Hand.kRight));
+    m_subsystem.drive(-m_xbox.getY(Hand.kRight));
   }
 
   // Called once the command ends or is interrupted.

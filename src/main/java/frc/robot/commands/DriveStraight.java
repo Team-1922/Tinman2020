@@ -16,7 +16,7 @@ public class DriveStraight extends CommandBase {
   double error = 0;
   double errorPrior = 0;
   double initAngle = 0;
-  private DriveTrain m_driveTrain;
+  private DriveTrain m_subsystem;
   private Joystick m_joystickRight;
   private Joystick m_joystickLeft;
   double p = .02;
@@ -26,37 +26,37 @@ public class DriveStraight extends CommandBase {
   /**
    * Hold the button and it doesn't rotate
    */
-  public DriveStraight(DriveTrain driveTrain, Joystick joystickRight, Joystick joystickLeft) {
-    m_driveTrain = driveTrain;
+  public DriveStraight(DriveTrain subsystem, Joystick joystickRight, Joystick joystickLeft) {
+    m_subsystem = subsystem;
     m_joystickLeft = joystickLeft;
     m_joystickRight = joystickRight;
-    addRequirements(m_driveTrain);
+    addRequirements(m_subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    initAngle = m_driveTrain.getAngle();
+    initAngle = m_subsystem.getAngle();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     
-    if (m_driveTrain.getFLip()) {
-      error = initAngle - (m_driveTrain.getAngle() + 180);
+    if (m_subsystem.getFLip()) {
+      error = initAngle - (m_subsystem.getAngle() + 180);
     } else {
-      error = initAngle - m_driveTrain.getAngle();
+      error = initAngle - m_subsystem.getAngle();
     }
 
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
     double RawY = (m_joystickLeft.getY() + m_joystickRight.getY()) / 2;
     
-    if (m_driveTrain.getFLip()) {
-      m_driveTrain.drive(RawY - responce, RawY + responce);
+    if (m_subsystem.getFLip()) {
+      m_subsystem.drive(RawY - responce, RawY + responce);
     } else {
-      m_driveTrain.drive(-RawY - responce, -RawY + responce);
+      m_subsystem.drive(-RawY - responce, -RawY + responce);
     }
 
     errorPrior = error;

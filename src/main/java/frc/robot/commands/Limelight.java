@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class Limelight extends CommandBase {
-  private final DriveTrain m_DriveTrain;
+  private final DriveTrain m_subsystem;
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx = table.getEntry("tx");
   NetworkTableEntry ty = table.getEntry("ty");
@@ -30,20 +30,20 @@ public class Limelight extends CommandBase {
    * Creates a new Limelight.
    */
   public Limelight(final DriveTrain subsystem, Joystick joystickLeft, Joystick joystickRight) {
-    m_DriveTrain = subsystem;
+    m_subsystem = subsystem;
     m_leftStick = joystickLeft;
     m_rightStick = joystickRight;
-    addRequirements(m_DriveTrain);
+    addRequirements(m_subsystem);
 
     // Use addRequirements() here to declare subsystem dependencies.
-    m_DriveTrain.setLimelightMode(1);
+    m_subsystem.setLimelightMode(1);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_DriveTrain.setLimelightLight(3);
-    m_DriveTrain.setLimelightMode(0);
+    m_subsystem.setLimelightLight(3);
+    m_subsystem.setLimelightMode(0);
 
   }
 
@@ -61,7 +61,7 @@ public class Limelight extends CommandBase {
     } else if (responce > .5) {
       responce = .5;
     }
-    m_DriveTrain.drive(-responce + m_leftStick.getY(), responce + m_rightStick.getY());
+    m_subsystem.drive(-responce + m_leftStick.getY(), responce + m_rightStick.getY());
     SmartDashboard.putNumber("error", error);
     SmartDashboard.putNumber("center", center);
     SmartDashboard.putNumber("responce", responce);
@@ -72,8 +72,8 @@ public class Limelight extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(final boolean interrupted) {
-    m_DriveTrain.setLimelightLight(1);
-    m_DriveTrain.setLimelightMode(1);
+    m_subsystem.setLimelightLight(1);
+    m_subsystem.setLimelightMode(1);
   }
 
   // Returns true when the command should end.

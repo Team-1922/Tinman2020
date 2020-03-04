@@ -14,12 +14,12 @@ import frc.robot.subsystems.DriveTrain;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class SetLimeLight extends InstantCommand {
-  private DriveTrain m_DriveTrain;
+  private DriveTrain m_subsystem;
   private boolean m_light;
 
-  public SetLimeLight(DriveTrain driveTrain, boolean light) {
-    m_DriveTrain = driveTrain;
-    addRequirements(m_DriveTrain);
+  public SetLimeLight(DriveTrain subsystem, boolean light) {
+    m_subsystem = subsystem;
+    addRequirements(m_subsystem);
     m_light = light;
   }
 
@@ -28,10 +28,10 @@ public class SetLimeLight extends InstantCommand {
   public void initialize() {
     
     if (m_light){
-      m_DriveTrain.setLimelightLight(3);
+      m_subsystem.setLimelightLight(3);
       
     } else {
-      m_DriveTrain.setLimelightLight(1);
+      m_subsystem.setLimelightLight(1);
     }
     
   }

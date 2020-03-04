@@ -13,7 +13,7 @@ import frc.robot.subsystems.DriveTrain;
 public class AutoTurn extends CommandBase {
   private static final double minimumResponse = 0.35;
 
-  private DriveTrain m_driveTrain;
+  private DriveTrain m_subsystem;
   private double m_angle;
   double error = 0;
   double errorPrior = 0;
@@ -26,17 +26,17 @@ public class AutoTurn extends CommandBase {
   /**
    * Turns the robot an X amount of degrees
    */
-  public AutoTurn(DriveTrain driveTrain, double angle) {
-    m_driveTrain = driveTrain;
+  public AutoTurn(DriveTrain subsystem, double angle) {
+    m_subsystem = subsystem;
     m_angle = angle;
-    addRequirements(m_driveTrain);
+    addRequirements(m_subsystem);
 
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    initAngle = m_driveTrain.getAngle();
+    initAngle = m_subsystem.getAngle();
     if (m_angle < 0) {
       isPositive = false;
     } else {
@@ -48,7 +48,7 @@ public class AutoTurn extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    error = initAngle - (m_driveTrain.getAngle() + m_angle);
+    error = initAngle - (m_subsystem.getAngle() + m_angle);
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
     if (responce <= minimumResponse && isPositive == true) {
@@ -56,7 +56,7 @@ public class AutoTurn extends CommandBase {
     } else if (responce >= minimumResponse && isPositive == false) {
       responce = -minimumResponse;
     }
-    m_driveTrain.drive(responce, -responce);
+    m_subsystem.drive(responce, -responce);
     errorPrior = error;
   }
 
@@ -71,10 +71,10 @@ public class AutoTurn extends CommandBase {
   public boolean isFinished() {
 
     if (isPositive) {
-      return (initAngle + m_angle + 5) >= m_driveTrain.getAngle();
+      return (initAngle + m_angle + 5) >= m_subsystem.getAngle();
       
     } else {
-      return (initAngle + m_angle - 5) <= m_driveTrain.getAngle();
+      return (initAngle + m_angle - 5) <= m_subsystem.getAngle();
     }
     
   }
