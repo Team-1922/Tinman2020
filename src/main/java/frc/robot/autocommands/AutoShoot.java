@@ -9,53 +9,42 @@ package frc.robot.autocommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Shooter;
 
-public class DriveStraightAuto extends CommandBase {
-  private DriveTrain m_subsystem;
-  private double m_speed;
+public class AutoShoot extends CommandBase {
+  private Shooter m_subsystem;
   private Timer m_timer;
-  private double m_time;
-  double error = 0;
-  double errorPrior = 0;
-  double initAngle = 0;
+  private double m_speed, m_time = 0;
 
   /**
-   * Takes the current angle through the gyroscope, and keep the bot poining in that direction
+   * Creates a new AutoShoot.
    */
-  public DriveStraightAuto(DriveTrain subsystem, double speed, double time) {
+  public AutoShoot(Shooter subsystem, double speed, double time) {
     m_subsystem = subsystem;
-    m_speed = speed;
-    m_timer = new Timer();
     m_time = time;
+    m_speed = speed;
     addRequirements(m_subsystem);
-
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     m_timer.start();
-    initAngle = m_subsystem.getAngle();
+    m_subsystem.hoodUp();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double p = .02;
-    double d = 0.0001;
-    double derivative;
-
-    error = initAngle - m_subsystem.getAngle();
-    derivative = (error - errorPrior) / .02;
-    double responce = p * error + (d * derivative);
-    m_subsystem.drive(m_speed + responce, m_speed - responce);
-    errorPrior = error;
+    m_subsystem.shoot(m_speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_subsystem.shoot(0);
+    m_subsystem.hoodDown();
     m_timer.stop();
   }
 

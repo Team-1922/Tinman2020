@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.autocommands.AutoTurn;
+import frc.robot.autogroups.Shoot3;
 import frc.robot.commands.BeltBarPassive;
 import frc.robot.commands.CollectorPassive;
 import frc.robot.commands.DriveStraight;
@@ -65,8 +65,9 @@ public class RobotContainer {
         // private final CollectorDown m_CollectorDown =
         // private final DriveStraightAuto m_autoCommand = new
         // DriveStraightAuto(m_driveTrain, .2, 2);
-        private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
+        // private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
         // private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
+        private final Shoot3 m_autoCommand = new Shoot3(m_driveTrain, m_Shooter, m_kickerPneumatics, m_lTransfer);
 
         /**
          * The container for the robot. Contains subsystems, OI devices, and commands.
