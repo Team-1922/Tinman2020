@@ -24,6 +24,7 @@ import frc.robot.commands.ShootVelocity;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.commands.ToggleCollector;
+import frc.robot.commands.ToggleHood;
 import frc.robot.commands.TransferCommand;
 import frc.robot.commands.TriggerKicker;
 import frc.robot.subsystems.BeltBar;
@@ -112,7 +113,7 @@ public class RobotContainer {
 
                 new JoystickButton(m_XBoxController, 7)
                                 // Shoot Velocity
-                                .toggleWhenPressed(new ShootingCommand(m_Shooter, 0));
+                                .whenPressed(new ShootingCommand(m_Shooter, 0));
                 // new JoystickButton(m_XBoxController, Constants.b)
                 // Shoot percent
                 // .toggleWhenPressed(new ShootingCommand(m_Shooter, .45));
@@ -136,6 +137,10 @@ public class RobotContainer {
                 new JoystickButton(m_joystickRight, 4)
                                 // Flip Robot
                                 .whenPressed(new FlipCommand(m_driveTrain));
+                new JoystickButton(m_XBoxController, 8)
+                                //
+                                .whenPressed(new ToggleHood(m_Shooter));
+
         }
 
         /**

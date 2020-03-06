@@ -44,7 +44,7 @@ public class DriveStraight extends CommandBase {
   public void execute() {
     
     if (m_subsystem.getFLip()) {
-      error = initAngle - (m_subsystem.getAngle() + 180);
+      error = initAngle - (m_subsystem.getAngle());
     } else {
       error = initAngle - m_subsystem.getAngle();
     }
@@ -54,7 +54,7 @@ public class DriveStraight extends CommandBase {
     double RawY = (m_joystickLeft.getY() + m_joystickRight.getY()) / 2;
     
     if (m_subsystem.getFLip()) {
-      m_subsystem.drive(RawY - responce, RawY + responce);
+      m_subsystem.drive(-RawY - responce, -RawY + responce);
     } else {
       m_subsystem.drive(-RawY - responce, -RawY + responce);
     }

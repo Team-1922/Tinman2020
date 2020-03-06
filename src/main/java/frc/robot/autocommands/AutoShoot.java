@@ -37,7 +37,8 @@ public class AutoShoot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.shoot(m_speed);
+    // m_subsystem.shoot(m_speed);
+    m_subsystem.setVelocity(m_speed);
   }
 
   // Called once the command ends or is interrupted.

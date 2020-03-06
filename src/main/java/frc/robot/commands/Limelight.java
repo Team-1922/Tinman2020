@@ -22,7 +22,7 @@ public class Limelight extends CommandBase {
   NetworkTableEntry ty = table.getEntry("ty");
   NetworkTableEntry ta = table.getEntry("ta");
   private double center, derivative, errorPrior;
-  private double p = .15;
+  private double p = .10;
   private double d = 0.03;
   private Joystick m_leftStick, m_rightStick;
 

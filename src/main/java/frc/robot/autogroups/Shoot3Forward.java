@@ -7,9 +7,9 @@
 
 package frc.robot.autogroups;
 
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.Constants;
-import frc.robot.autocommands.AutoShoot;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.autocommands.DriveStraightAuto;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.KickerPneumatics;
 import frc.robot.subsystems.LinearTransfer;
 import frc.robot.subsystems.Shooter;
@@ -17,28 +17,27 @@ import frc.robot.subsystems.Shooter;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class shootPara extends ParallelCommandGroup {
+public class Shoot3Forward extends SequentialCommandGroup {
+  private DriveTrain m_driveTrain;
   private Shooter m_shooter;
   private KickerPneumatics m_kicker;
   private LinearTransfer m_linearTransfer;
 
   /**
-   * Creates a new shootPara.
+   * Thanks Bri
    */
-  public shootPara(Shooter shooter, KickerPneumatics kickerPneumatics,
+  public Shoot3Forward(DriveTrain driveTrain, Shooter shooter, KickerPneumatics kickerPneumatics,
       LinearTransfer linearTransfer) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());super();
+    m_driveTrain = driveTrain;
     m_shooter = shooter;
     m_kicker = kickerPneumatics;
     m_linearTransfer = linearTransfer;
     addCommands(
         //
-        new AutoShoot(m_shooter, Constants.shooterSpeedLow, 6.0),
+        new shootPara(m_shooter, m_kicker, m_linearTransfer),
         //
-        new KickAfterDelay(m_kicker, m_linearTransfer)
-    //
-    );
+        new DriveStraightAuto(m_driveTrain, .2, .2));
 
   }
+
 }

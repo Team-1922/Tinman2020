@@ -23,6 +23,7 @@ public class Collector extends SubsystemBase {
   public Collector() {
     super();
     CollectorSolenoid = new Solenoid(Constants.collectorP);
+    
   }
 
   public void drive(double speed) {

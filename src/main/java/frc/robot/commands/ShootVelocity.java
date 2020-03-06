@@ -27,7 +27,7 @@ public class ShootVelocity extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.hoodUp();
+    // m_subsystem.hoodUp();
     m_subsystem.setTargetSpeed(m_target);
   }
 
@@ -40,7 +40,7 @@ public class ShootVelocity extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.hoodDown();
+    // m_subsystem.hoodDown();
   }
 
   // Returns true when the command should end.

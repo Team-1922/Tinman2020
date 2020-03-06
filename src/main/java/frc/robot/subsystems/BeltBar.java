@@ -24,7 +24,7 @@ public class BeltBar extends SubsystemBase {
     }
 
     public void drive(double speed) {
-        beltBarLeft.set(-speed);
+        beltBarLeft.set(-speed*.8);
         beltBarRight.set(-speed);
     }
 

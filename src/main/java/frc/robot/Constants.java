@@ -1,3 +1,5 @@
+
+
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -53,14 +55,15 @@ public final class Constants {
     // pneumatics
     public static final int kickerSolenoid = 1;
     public static final int tensioner = 3;
-    public static final int hood = 0;
+    public static final int hood = 4;
     public static final int collectorP = 2;
     
 
     // speeds
-    public static final double shooterSpeedHigh = 3200;
-    public static final double shooterSpeedMid = 2600;
-    public static final double shooterSpeedLow = 2000;
+    public static final double shooterSpeedHigh = 1250;
+    public static final double shooterSpeedMid = 500;
+    public static final double shooterSpeedLow = 972;
+
     public static final double kF = 0;
 
     // xbox
