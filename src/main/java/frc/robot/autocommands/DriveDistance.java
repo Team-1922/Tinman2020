@@ -22,7 +22,7 @@ public class DriveDistance extends CommandBase {
   double derivative;
   double initEncoderValue = 0;
   double m_speed = 0;
-  
+
   /**
    * Creates a new DriveDistance.
    */
@@ -37,25 +37,20 @@ public class DriveDistance extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
-    initAngle = m_subsystem.getAngle();    
+
+    initAngle = m_subsystem.getAngle();
     initEncoderValue = m_subsystem.getLeftEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      error = initAngle - m_subsystem.getAngle();
-    
+    error = initAngle - m_subsystem.getAngle();
 
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
-    
-    
-    
-    
-      m_subsystem.drive(m_speed - responce, m_speed + responce);
-    
+
+    m_subsystem.drive(m_speed - responce, m_speed + responce);
 
     errorPrior = error;
   }
@@ -68,21 +63,19 @@ public class DriveDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-   
 
+    double currentValue = m_subsystem.getLeftEncoder() - initEncoderValue;
     if (m_speed >= 0) {
-      double currentValue = m_subsystem.getLeftEncoder() - initEncoderValue;
-      if (currentValue >= Constants.ticksPerFoot*m_distance) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      // if (currentValue >= Constants.ticksPerFoot * m_distance) {
+      // return true;
+      // } else {
+      // return false;
+      // }
+      return currentValue >= Constants.ticksPerFoot * m_distance;
 
+    } else {
+      // Gabe >>>> handle m_speed < 0
+      return currentValue <= Constants.ticksPerFoot * m_distance;
     }
-    else {
-        // Gabe >>>>  handle m_speed < 0
-    }
-  }
   }
 }
