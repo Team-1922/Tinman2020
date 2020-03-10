@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.autogroups.Shoot3;
+import frc.robot.autogroups.Shoot3Forward;
 import frc.robot.commands.BeltBarPassive;
 import frc.robot.commands.CollectorPassive;
 import frc.robot.commands.DriveStraight;
@@ -20,6 +20,7 @@ import frc.robot.commands.FlipCommand;
 import frc.robot.commands.KickerPassive;
 import frc.robot.commands.Limelight;
 import frc.robot.commands.LinearPassive;
+import frc.robot.commands.ShootStop;
 import frc.robot.commands.ShootVelocity;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
@@ -62,13 +63,14 @@ public class RobotContainer {
         // pre-generated commands
         private final TankDriveCommand m_TankDrive = new TankDriveCommand(m_driveTrain, m_joystickLeft,
                         m_joystickRight);
-        private final ShootingCommand m_ShootStop = new ShootingCommand(m_Shooter, 0);
+        private final ShootStop m_ShootStop = new ShootStop(m_Shooter);
         // private final CollectorDown m_CollectorDown =
         // private final DriveStraightAuto m_autoCommand = new
         // DriveStraightAuto(m_driveTrain, .2, 2);
         // private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
         // private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
-        private final Shoot3 m_autoCommand = new Shoot3(m_driveTrain, m_Shooter, m_kickerPneumatics, m_lTransfer);
+        private final Shoot3Forward m_autoCommand = new Shoot3Forward(m_driveTrain, m_Shooter, m_kickerPneumatics,
+                        m_lTransfer, m_Collector);
 
         /**
          * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -104,6 +106,11 @@ public class RobotContainer {
                 new JoystickButton(m_XBoxController, Constants.b)
                                 // Shoot Velocity
                                 .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeedHigh));
+
+                // new JoystickButton(m_XBoxController, Constants.b)
+                // // Shoot Velocity
+                // .toggleWhenPressed(new ShootingCommand(m_Shooter, .75));
+
                 new JoystickButton(m_XBoxController, Constants.y)
                                 // Shoot Velocity
                                 .toggleWhenPressed(new ShootVelocity(m_Shooter, Constants.shooterSpeedMid));
@@ -137,6 +144,7 @@ public class RobotContainer {
                 new JoystickButton(m_joystickRight, 4)
                                 // Flip Robot
                                 .whenPressed(new FlipCommand(m_driveTrain));
+
                 new JoystickButton(m_XBoxController, 8)
                                 //
                                 .whenPressed(new ToggleHood(m_Shooter));

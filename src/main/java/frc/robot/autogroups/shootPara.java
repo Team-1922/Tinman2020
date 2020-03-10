@@ -34,9 +34,10 @@ public class shootPara extends ParallelCommandGroup {
     m_linearTransfer = linearTransfer;
     addCommands(
         //
-        new AutoShoot(m_shooter, Constants.shooterSpeedLow, 6.0),
+        new AutoShoot(m_shooter, Constants.autoSpeed, 6.0),
+        // new AutoShoot(m_shooter, Constants.shooterSpeedMid, 6.0),
         //
-        new KickAfterDelay(m_kicker, m_linearTransfer)
+        new KickAfterDelay(m_kicker, m_shooter, m_linearTransfer)
     //
     );
 

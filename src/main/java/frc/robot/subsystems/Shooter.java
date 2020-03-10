@@ -47,7 +47,7 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putNumber("Left Temp", shooterLeft.getTemperature());
         SmartDashboard.putNumber("Right Temp", shooterRight.getTemperature());
 
-        if (getVelocity() >= targetSpeed - 200) {
+        if (getVelocity() >= targetSpeed*.9) {
             SmartDashboard.putBoolean("Up To Speed", true);
         } else {
             SmartDashboard.putBoolean("Up To Speed", false);
@@ -70,9 +70,13 @@ public class Shooter extends SubsystemBase {
     public void runKicker(double speed) {
         kickerMotor.set(speed);
     }
+    // public void getOutput(){
+    //     shooterLeft.get
+    // }
 
     public void setVelocity(double speed) {
-        shooterLeft.set(ControlMode.Velocity, speed * 4096 / 600);
+        shooterLeft.set(ControlMode.Velocity, speed * 2048 / 600);
+
         kickerMotor.set(.65);
     }
 
@@ -89,7 +93,7 @@ public class Shooter extends SubsystemBase {
     }
 
     public double getVelocity() {
-        return shooterLeft.getSelectedSensorVelocity();
+        return shooterLeft.getSelectedSensorVelocity() * (600.0/2048.0);
     }
 
     public double getTargetSpeed() {
@@ -98,6 +102,10 @@ public class Shooter extends SubsystemBase {
 
     public void setTargetSpeed(double targetSpeed) {
         this.targetSpeed = targetSpeed;
+    }
+
+    public void clearCurrentCommand(){
+        this.getCurrentCommand().end(true);
     }
 
 }

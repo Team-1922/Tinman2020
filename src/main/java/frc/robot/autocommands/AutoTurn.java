@@ -56,7 +56,7 @@ public class AutoTurn extends CommandBase {
     } else if (responce >= minimumResponse && isPositive == false) {
       responce = -minimumResponse;
     }
-    m_subsystem.drive(responce, -responce);
+    m_subsystem.driveUnflipped(responce, -responce);
     errorPrior = error;
   }
 

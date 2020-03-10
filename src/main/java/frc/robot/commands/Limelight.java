@@ -43,7 +43,7 @@ public class Limelight extends CommandBase {
   @Override
   public void initialize() {
     m_subsystem.setLimelightLight(3);
-    m_subsystem.setLimelightMode(0);
+    m_subsystem.setLimelightMode(1);
 
   }
 

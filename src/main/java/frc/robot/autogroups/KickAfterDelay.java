@@ -13,6 +13,7 @@ import frc.robot.autocommands.Delay;
 import frc.robot.commands.TriggerKicker;
 import frc.robot.subsystems.KickerPneumatics;
 import frc.robot.subsystems.LinearTransfer;
+import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -20,21 +21,21 @@ import frc.robot.subsystems.LinearTransfer;
 public class KickAfterDelay extends SequentialCommandGroup {
   private KickerPneumatics m_kicker;
   private LinearTransfer m_linearTransfer;
+  private Shooter m_shooter;
 
   /**
    * Creates a new KickAfterDelay.
    */
-  public KickAfterDelay(KickerPneumatics kickerPneumatics, LinearTransfer linearTransfer) {
+  public KickAfterDelay(KickerPneumatics kickerPneumatics, Shooter shooter, LinearTransfer linearTransfer) {
     // Add your commands in the super() call, e.g.
     // super(new FooCommand(), new BarCommand());
     m_kicker = kickerPneumatics;
+    m_shooter = shooter;
     m_linearTransfer = linearTransfer;
     addCommands(
         //
-        new Delay(3),
-        //
         new TriggerKicker(m_kicker, true),
         //
-        new AutoLinear(m_linearTransfer, .5, 5.0));
+        new AutoLinear(m_linearTransfer, m_shooter, -.5, 3.0));
   }
 }

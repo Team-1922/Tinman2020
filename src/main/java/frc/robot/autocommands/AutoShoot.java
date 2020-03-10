@@ -22,8 +22,10 @@ public class AutoShoot extends CommandBase {
   public AutoShoot(Shooter subsystem, double speed, double time) {
     m_subsystem = subsystem;
     m_time = time;
+    m_timer = new Timer();
     m_speed = speed;
     addRequirements(m_subsystem);
+
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

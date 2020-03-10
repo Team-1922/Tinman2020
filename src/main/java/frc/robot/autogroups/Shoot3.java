@@ -9,6 +9,7 @@ package frc.robot.autogroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.autocommands.DriveStraightAuto;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.KickerPneumatics;
 import frc.robot.subsystems.LinearTransfer;
@@ -22,21 +23,25 @@ public class Shoot3 extends SequentialCommandGroup {
   private Shooter m_shooter;
   private KickerPneumatics m_kicker;
   private LinearTransfer m_linearTransfer;
+  private Collector m_collector;
 
   /**
    * Creates a new Shoot3.
    */
   public Shoot3(DriveTrain driveTrain, Shooter shooter, KickerPneumatics kickerPneumatics,
-      LinearTransfer linearTransfer) {
+      LinearTransfer linearTransfer, Collector collector) {
     m_driveTrain = driveTrain;
     m_shooter = shooter;
     m_kicker = kickerPneumatics;
     m_linearTransfer = linearTransfer;
+    m_collector = collector;
     addCommands(
+        //
+        // new AutoCollectorDown(m_collector),
         //
         new shootPara(m_shooter, m_kicker, m_linearTransfer),
         //
-        new DriveStraightAuto(m_driveTrain, -.2, -.2));
+        new DriveStraightAuto(m_driveTrain, .3, 3));
 
   }
 

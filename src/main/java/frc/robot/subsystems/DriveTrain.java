@@ -41,6 +41,8 @@ public class DriveTrain extends SubsystemBase {
   private double y = ty.getDouble(0.0);
   private double area = ta.getDouble(0.0);
   private boolean isFlipped = false;
+  private int leftEncoder, rightEncoder = 0;
+  
 
   public DriveTrain() {
     super();
@@ -55,6 +57,13 @@ public class DriveTrain extends SubsystemBase {
     rearLeft.setInverted(InvertType.FollowMaster);
   }
 
+  @Override
+  public void periodic(){
+    SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
+    SmartDashboard.putNumber("Right Encoder", getRightEncoder());
+
+  }
+
   public void drive(double left, double right) {
     if (getFLip()) {
       frontLeft.set(-right);
@@ -63,9 +72,11 @@ public class DriveTrain extends SubsystemBase {
       frontLeft.set(left);
       frontRight.set(right);
     }
+  }
 
-    
-
+  public void driveUnflipped(double left, double right) {
+    frontLeft.set(left);
+    frontRight.set(right);
   }
 
   public double getAngle() {
@@ -102,10 +113,11 @@ public class DriveTrain extends SubsystemBase {
   public double getRightEncoder() {
     return frontRight.getSensorCollection().getQuadraturePosition();
   }
-/**
- * @param state State of the light
- *
- */
+
+  /**
+   * @param state State of the light
+   *
+   */
   public void setLimelightLight(int state) {
     // 1 off
     // 3 on

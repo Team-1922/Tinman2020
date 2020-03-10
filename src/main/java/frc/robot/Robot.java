@@ -8,6 +8,8 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -23,7 +25,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -34,7 +36,9 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    CameraServer.getInstance().startAutomaticCapture();
+    CameraServer.getInstance().startAutomaticCapture(0);
+    CameraServer.getInstance().startAutomaticCapture(1);
+    
     
 
   }
@@ -66,6 +70,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     System.out.println("Robot Disabled");
+    // table.getEntry("camMode").setNumber(1);
   }
 
   @Override

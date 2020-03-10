@@ -1,5 +1,4 @@
 
-
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -57,12 +56,13 @@ public final class Constants {
     public static final int tensioner = 3;
     public static final int hood = 4;
     public static final int collectorP = 2;
-    
 
     // speeds
-    public static final double shooterSpeedHigh = 1250;
-    public static final double shooterSpeedMid = 500;
-    public static final double shooterSpeedLow = 972;
+    public static final double shooterSpeedHigh = 3200; // B
+    // public static final double shooterSpeedMid = 900; // Y 
+    public static final double shooterSpeedMid = 500; // Y // 900
+    public static final double shooterSpeedLow = 850; // X
+    public static final double autoSpeed = 850; // auto
 
     public static final double kF = 0;
 
@@ -73,10 +73,12 @@ public final class Constants {
     public static final int y = 4;
     public static final int lb = 5;
     public static final int rb = 6;
-    
 
     // joystick
     public static final int trigger = 1;
     public static final int thumbButton = 2;
 
+
+    // constants
+    public static final double ticksPerFoot = 0;
 }
