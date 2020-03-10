@@ -9,7 +9,6 @@ package frc.robot.autogroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.autocommands.AutoLinear;
-import frc.robot.autocommands.Delay;
 import frc.robot.commands.TriggerKicker;
 import frc.robot.subsystems.KickerPneumatics;
 import frc.robot.subsystems.LinearTransfer;
