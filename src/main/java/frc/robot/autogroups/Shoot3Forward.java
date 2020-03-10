@@ -23,7 +23,7 @@ public class Shoot3Forward extends SequentialCommandGroup {
   private Shooter m_shooter;
   private KickerPneumatics m_kicker;
   private LinearTransfer m_linearTransfer;
-  private Collector m_collector;
+  // private Collector m_collector;
 
   /**
    * Thanks Bri
@@ -34,6 +34,7 @@ public class Shoot3Forward extends SequentialCommandGroup {
     m_shooter = shooter;
     m_kicker = kickerPneumatics;
     m_linearTransfer = linearTransfer;
+    // m_collector = collector;
     addCommands(
         //
         // new AutoCollectorDown(m_collector),
