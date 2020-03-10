@@ -41,8 +41,7 @@ public class DriveTrain extends SubsystemBase {
   private double y = ty.getDouble(0.0);
   private double area = ta.getDouble(0.0);
   private boolean isFlipped = false;
-  private int leftEncoder, rightEncoder = 0;
-  
+  private int oldLeftEncoder, oldRightEncoder = 0;
 
   public DriveTrain() {
     super();
@@ -58,7 +57,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   @Override
-  public void periodic(){
+  public void periodic() {
     SmartDashboard.putNumber("Left Encoder", getLeftEncoder());
     SmartDashboard.putNumber("Right Encoder", getRightEncoder());
 
@@ -107,11 +106,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public double getLeftEncoder() {
-    return frontLeft.getSensorCollection().getQuadraturePosition();
+    return frontLeft.getSensorCollection().getQuadraturePosition() - oldLeftEncoder;
   }
 
   public double getRightEncoder() {
-    return frontRight.getSensorCollection().getQuadraturePosition();
+    return frontRight.getSensorCollection().getQuadraturePosition() - oldRightEncoder;
   }
 
   /**
@@ -126,6 +125,11 @@ public class DriveTrain extends SubsystemBase {
 
   public void setLimelightMode(int state) {
     table.getEntry("camMode").setNumber(state);
+  }
+
+  public void resetEncoders() {
+    oldRightEncoder = frontRight.getSensorCollection().getQuadraturePosition();
+    oldLeftEncoder = frontLeft.getSensorCollection().getQuadraturePosition();
   }
 
 }
