@@ -80,5 +80,5 @@ public final class Constants {
 
 
     // constants
-    public static final double ticksPerFoot = 0;
+    public static final double ticksPerFoot = 2510;
 }
