@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -18,12 +17,9 @@ import frc.robot.Constants;
  */
 public class LinearTransfer extends SubsystemBase {
   private WPI_TalonSRX linearTransfer = new WPI_TalonSRX(Constants.linearTransfer);
-  private WPI_TalonSRX linearIntake = new WPI_TalonSRX(Constants.linearIntake);
 
   public LinearTransfer() {
     super();
-    linearIntake.set(ControlMode.Follower, linearTransfer.getDeviceID());
-    linearIntake.setInverted(false);
   }
 
   public void drive(double speed) {

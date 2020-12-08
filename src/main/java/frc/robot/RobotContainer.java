@@ -20,6 +20,7 @@ import frc.robot.commands.FlipCommand;
 import frc.robot.commands.Limelight;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
+import frc.robot.commands.ToggleHoodCommand;
 import frc.robot.commands.TransferCommand;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.DriveTrain;
@@ -91,28 +92,30 @@ public class RobotContainer {
                                 //
                                 .toggleWhenPressed(new ShootingCommand(m_Shooter, -.5));
 
-                new JoystickButton(m_joystickRight, 2)
-                                //
-                                .toggleWhenPressed(new CollectorDown(m_Collector, .5));
-
                 new JoystickButton(m_XBoxController, 3)
                                 //
                                 .toggleWhenPressed(new CollectorDown(m_Collector, .5));
 
-                new JoystickButton(m_XBoxController, 5)
+                new JoystickButton(m_XBoxController, 5) // left bumper
                                 //
                                 .whileHeld(new TransferCommand(m_lTransfer, .5));
 
-                new JoystickButton(m_XBoxController, 6)
+                new JoystickButton(m_XBoxController, 6) // right bumper
                                 //
                                 .whileHeld(new TransferCommand(m_lTransfer, -.4));
 
-                new JoystickButton(m_joystickRight, 1)
+                new JoystickButton(m_XBoxController, 4) // right bumper
+                                //
+                                .whenPressed(new ToggleHoodCommand(m_Shooter));
+               
+                                new JoystickButton(m_joystickRight, 1)
                                 //
                                 .whileHeld(new Limelight(m_driveTrain, m_joystickLeft, m_joystickRight));
                 new JoystickButton(m_joystickRight, 4)
                                 //
                                 .whenPressed(new FlipCommand(m_driveTrain));
+
+                
         }
 
         /**

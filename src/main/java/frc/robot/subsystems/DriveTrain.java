@@ -52,8 +52,8 @@ public class DriveTrain extends SubsystemBase {
 
   public void drive(double left, double right, boolean flipped) {
     if (flipped) {
-      frontLeft.set(-left);
-      frontRight.set(right);
+      frontRight.set(left);
+      frontLeft.set(-right);
     } else {
       frontLeft.set(left);
       frontRight.set(-right);
