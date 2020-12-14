@@ -30,6 +30,8 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX rearLeft = new WPI_TalonSRX(Constants.rearLeft);
   private WPI_TalonSRX frontRight = new WPI_TalonSRX(Constants.frontRight);
   private WPI_TalonSRX rearRight = new WPI_TalonSRX(Constants.rearRight);
+
+
   private AHRS ahrs = new AHRS(SPI.Port.kMXP);
   NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   NetworkTableEntry tx = table.getEntry("tx");
@@ -38,25 +40,30 @@ public class DriveTrain extends SubsystemBase {
   private double x = tx.getDouble(0.0);
   private double y = ty.getDouble(0.0);
   private double area = ta.getDouble(0.0);
+
   private boolean isFlipped = false;
 
   public DriveTrain() {
     super();
-    rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
+
+    rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID()      );
+
     rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
+
     frontRight.setInverted(true);
     rearRight.setInverted(InvertType.FollowMaster);
+    
     frontLeft.setInverted(true);
     rearLeft.setInverted(InvertType.FollowMaster);
   }
 
-  public void drive(double left, double right, boolean flipped) {
-    if (flipped) {
-      frontLeft.set(-left);
+  public void drive(double left, double right) {
+    if (isFlipped) {
+      frontLeft.set(- left);
       frontRight.set(right);
     } else {
       frontLeft.set(left);
-      frontRight.set(-right);
+      frontRight.set(- right);
     }
 
   }
@@ -79,9 +86,11 @@ public class DriveTrain extends SubsystemBase {
   public void setFlip(boolean f){
     isFlipped = f;
   }
-  public boolean getFLip(){
+  
+  public boolean getFlip(){
     return isFlipped;
   }
+
   public void toggleFlip(){
     isFlipped = !isFlipped;
   }

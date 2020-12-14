@@ -99,6 +99,8 @@ public class RobotContainer {
                                 //
                                 .toggleWhenPressed(new CollectorDown(m_Collector, .5));
 
+                                
+
                 new JoystickButton(m_XBoxController, 5)
                                 //
                                 .whileHeld(new TransferCommand(m_lTransfer, .5));
@@ -106,6 +108,8 @@ public class RobotContainer {
                 new JoystickButton(m_XBoxController, 6)
                                 //
                                 .whileHeld(new TransferCommand(m_lTransfer, -.4));
+
+
 
                 new JoystickButton(m_joystickRight, 1)
                                 //

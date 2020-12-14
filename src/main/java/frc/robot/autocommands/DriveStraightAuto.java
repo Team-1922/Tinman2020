@@ -49,7 +49,7 @@ public class DriveStraightAuto extends CommandBase {
     error = initAngle - m_driveTrain.getAngle();
     derivative = (error - errorPrior) / .02;
     double responce = p * error + (d * derivative);
-    m_driveTrain.drive(m_speed + responce, m_speed - responce, m_driveTrain.getFLip());
+    m_driveTrain.drive(m_speed + responce, m_speed - responce);
     errorPrior = error;
   }
 

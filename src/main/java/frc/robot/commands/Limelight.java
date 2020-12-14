@@ -47,18 +47,23 @@ public class Limelight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     double x = tx.getDouble(0.0);
     // double y = ty.getDouble(0.0);
     // double area = ta.getDouble(0.0);
+
     final double error = x;
     derivative = (error - errorPrior);
     double responce = p * error + (d * derivative);
+
+
     if (responce < -.5) {
       responce = -.5;
     } else if (responce > .5) {
       responce = .5;
     }
-    m_DriveTrain.drive(-responce + m_leftStick.getY(), responce + m_rightStick.getY(), m_DriveTrain.getFLip());
+
+    m_DriveTrain.drive(-responce + m_leftStick.getY(), responce + m_rightStick.getY());
     SmartDashboard.putNumber("error", error);
     SmartDashboard.putNumber("center", center);
     SmartDashboard.putNumber("responce", responce);
