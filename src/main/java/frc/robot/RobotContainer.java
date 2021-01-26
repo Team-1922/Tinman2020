@@ -7,16 +7,20 @@
 
 package frc.robot;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.autocommands.AutoTurn;
+import frc.robot.autogroups.SlalomAuto;
 import frc.robot.commands.CollectorDown;
 import frc.robot.commands.CollectorUp;
 import frc.robot.commands.DriveStraight;
 import frc.robot.commands.FlipCommand;
+import frc.robot.commands.IndexerCommand;
+import frc.robot.commands.LifterCommand;
 import frc.robot.commands.Limelight;
 import frc.robot.commands.ShootingCommand;
 import frc.robot.commands.TankDriveCommand;
@@ -24,6 +28,8 @@ import frc.robot.commands.ToggleHoodCommand;
 import frc.robot.commands.TransferCommand;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Indexer;
+import frc.robot.subsystems.Lifter;
 import frc.robot.subsystems.LinearTransfer;
 import frc.robot.subsystems.Shooter;
 
@@ -40,6 +46,8 @@ public class RobotContainer {
         private final Shooter m_Shooter = new Shooter();
         private final LinearTransfer m_lTransfer = new LinearTransfer();
         private final Collector m_Collector = new Collector();
+        private final Indexer m_indexer = new Indexer();
+        private final Lifter m_lifter = new Lifter();
 
         private final Joystick m_joystickLeft = new Joystick(1);
         private final Joystick m_joystickRight = new Joystick(0);
@@ -54,7 +62,7 @@ public class RobotContainer {
         // private final CollectorDown m_CollectorDown =
         // private final DriveStraightAuto m_autoCommand = new
         // DriveStraightAuto(m_driveTrain, .2, 2);
-        private final AutoTurn m_autoCommand = new AutoTurn(m_driveTrain, 90);
+        private final SlalomAuto m_autoCommand = new SlalomAuto(m_driveTrain);
         // private final DefaultAuto m_autoCommand = new DefaultAuto(m_driveTrain);
 
         /**
@@ -98,19 +106,29 @@ public class RobotContainer {
 
                 new JoystickButton(m_XBoxController, 5) // left bumper
                                 //
-                                .whileHeld(new TransferCommand(m_lTransfer, .5));
+                                .whileHeld(new TransferCommand(m_lTransfer, .9));
 
                 new JoystickButton(m_XBoxController, 6) // right bumper
                                 //
-                                .whileHeld(new TransferCommand(m_lTransfer, -.4));
+                                .whileHeld(new TransferCommand(m_lTransfer, -.75));
 
                 new JoystickButton(m_XBoxController, 4) // right bumper
                                 //
                                 .whenPressed(new ToggleHoodCommand(m_Shooter));
+
+                new JoystickButton(m_XBoxController, 7) // 
+                                //
+                                .whenPressed(new IndexerCommand(m_indexer));
+                 
+                new JoystickButton(m_XBoxController, 8) // 
+                                //
+                                .whenPressed(new LifterCommand(m_lifter));
                
-                                new JoystickButton(m_joystickRight, 1)
+                new JoystickButton(m_joystickRight, 1)
                                 //
                                 .whileHeld(new Limelight(m_driveTrain, m_joystickLeft, m_joystickRight));
+
+
                 new JoystickButton(m_joystickRight, 4)
                                 //
                                 .whenPressed(new FlipCommand(m_driveTrain));

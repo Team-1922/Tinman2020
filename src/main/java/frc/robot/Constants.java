@@ -56,7 +56,7 @@ public final class Constants {
 
     // pneumatics
     // public static final int collectorRight = 0;
-    public static final int tensioner = 1;
+    public static final int lifter = 1;
     public static final int hood = 2;
     public static final int collectorP = 3;
     

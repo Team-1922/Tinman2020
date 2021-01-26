@@ -8,19 +8,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Indexer;
 
+public class IndexerCommand extends CommandBase {
 
-public class ShootVelocity extends CommandBase {
-  private final Shooter m_Subsystem;
-  private double m_target; 
+  private Indexer m_indexerSubsystem;
+
   /**
-   * Creates a new SetVelocity.
+   * Creates a new IndexerCommand.
    */
-  public ShootVelocity(Shooter subsystem, double target) {
-    m_Subsystem = subsystem;
-    m_target = target; 
-    addRequirements(m_Subsystem);
+  public IndexerCommand(Indexer indexerSubsystem) {
+
+    m_indexerSubsystem = indexerSubsystem;
+    addRequirements(indexerSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -32,12 +32,13 @@ public class ShootVelocity extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Subsystem.setVelocity((m_target * 4096 / 600));
+    m_indexerSubsystem.drive(0.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_indexerSubsystem.drive(0);
   }
 
   // Returns true when the command should end.
