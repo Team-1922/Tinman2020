@@ -32,6 +32,7 @@ import frc.robot.subsystems.Indexer;
 import frc.robot.subsystems.Lifter;
 import frc.robot.subsystems.LinearTransfer;
 import frc.robot.subsystems.Shooter;
+import frc.robot.autocommands.DriveForward;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -88,19 +89,21 @@ public class RobotContainer {
                                 //
                                 .whileHeld(new DriveStraight(m_driveTrain, m_joystickLeft, m_joystickRight));
 
-                // new JoystickButton(m_joystickLeft, 3)
-                // //
-                // .whenPressed(new AutoTurn(m_driveTrain, -90));
+                new JoystickButton(m_joystickRight, 1)
+                //
+                                .whileHeld(new Limelight(m_driveTrain, m_joystickLeft, m_joystickRight));
 
-                // new JoystickButton(m_joystickLeft, 4)
-                // //
-                // .whenPressed(new AutoTurn(m_driveTrain, 90));
-
-                new JoystickButton(m_XBoxController, 2)
+                new JoystickButton(m_joystickRight, 4)
                                 //
-                                .toggleWhenPressed(new ShootingCommand(m_Shooter, -.5));
+                                .whenPressed(new FlipCommand(m_driveTrain));
 
-                new JoystickButton(m_XBoxController, 3)
+
+
+                new JoystickButton(m_XBoxController, 2) // B
+                                //
+                                .toggleWhenPressed(new ShootingCommand(m_Shooter, -1.0));
+
+                new JoystickButton(m_XBoxController, 3) // X
                                 //
                                 .toggleWhenPressed(new CollectorDown(m_Collector, .5));
 
@@ -110,30 +113,27 @@ public class RobotContainer {
 
                 new JoystickButton(m_XBoxController, 6) // right bumper
                                 //
-                                .whileHeld(new TransferCommand(m_lTransfer, -.75));
+                                .whileHeld(new TransferCommand(m_lTransfer, -1.0));
 
-                new JoystickButton(m_XBoxController, 4) // right bumper
+                new JoystickButton(m_XBoxController, 4) // Y
                                 //
                                 .whenPressed(new ToggleHoodCommand(m_Shooter));
 
-                new JoystickButton(m_XBoxController, 7) // 
+                new JoystickButton(m_XBoxController, 7) // Left side menu button
                                 //
-                                .whenPressed(new IndexerCommand(m_indexer));
-                 
-                new JoystickButton(m_XBoxController, 8) // 
+                                .toggleWhenPressed(new IndexerCommand(m_indexer));
+
+                new JoystickButton(m_XBoxController, 8) // Right side menu button
                                 //
                                 .whenPressed(new LifterCommand(m_lifter));
-               
-                new JoystickButton(m_joystickRight, 1)
-                                //
-                                .whileHeld(new Limelight(m_driveTrain, m_joystickLeft, m_joystickRight));
+
+                new JoystickButton(m_XBoxController, 1) // A
+                                //Because we need to test it
+                                .whenPressed(new DriveForward(m_driveTrain, 18));
 
 
-                new JoystickButton(m_joystickRight, 4)
-                                //
-                                .whenPressed(new FlipCommand(m_driveTrain));
 
-                
+
         }
 
         /**

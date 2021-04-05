@@ -26,7 +26,7 @@ public class Indexer extends SubsystemBase {
     m_rightIndexer.setInverted(false);
 
     m_leftIndexer.set(ControlMode.Follower, m_rightIndexer.getDeviceID());
-    m_leftIndexer.setInverted(InvertType.FollowMaster);
+    m_leftIndexer.setInverted(InvertType.OpposeMaster);
   }
 
   public void drive(double speed) {

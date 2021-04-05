@@ -9,47 +9,39 @@ package frc.robot.autocommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.Constants;
 
-public class DriveForward extends CommandBase {
+
+public class Turn extends CommandBase {
   private DriveTrain m_driveTrain;
- private double m_distance;
- private double m_encoderStartValue;
+private double m_angle;
   /**
-   * Creates a new DriveForward.
+   * Creates a new Turn.
    */
-  public DriveForward(DriveTrain driveTrain, double distance) {
+  public Turn(DriveTrain driveTrain, double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_driveTrain = driveTrain;
     addRequirements(m_driveTrain);
-    m_distance = distance*Constants.encoderInchConversion ;
+    m_angle = angle;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_encoderStartValue = m_driveTrain.getLeftEncoder();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_driveTrain.drive(.25, .25, false);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_driveTrain.drive(0, 0, false);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double leftEncoder = m_driveTrain.getLeftEncoder();
-    if (m_distance <= leftEncoder - m_encoderStartValue){
-      return true;
-    }
     return false;
   }
 }

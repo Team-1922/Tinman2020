@@ -61,4 +61,5 @@ public final class Constants {
     public static final int collectorP = 3;
     
 
+public static final  double encoderInchConversion = 4096/6;
 }
