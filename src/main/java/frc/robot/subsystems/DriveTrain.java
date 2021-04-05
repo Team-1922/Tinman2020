@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -44,16 +45,20 @@ public class DriveTrain extends SubsystemBase {
     super();
     rearLeft.set(ControlMode.Follower, frontLeft.getDeviceID());
     rearRight.set(ControlMode.Follower, frontRight.getDeviceID());
+    frontLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    frontRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    frontRight.setSensorPhase(false);
     frontRight.setInverted(true);
     rearRight.setInverted(InvertType.FollowMaster);
+    frontLeft.setSensorPhase(false);
     frontLeft.setInverted(true);
     rearLeft.setInverted(InvertType.FollowMaster);
   }
 
   public void drive(double left, double right, boolean flipped) {
     if (flipped) {
-      frontLeft.set(-left);
-      frontRight.set(right);
+      frontRight.set(left);
+      frontLeft.set(-right);
     } else {
       frontLeft.set(left);
       frontRight.set(-right);

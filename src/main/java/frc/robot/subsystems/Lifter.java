@@ -7,27 +7,31 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 /**
- * Add your docs here.
+ * Lifter Subsystem
  */
-public class LinearTransfer extends SubsystemBase {
-  private WPI_TalonSRX linearTransfer = new WPI_TalonSRX(Constants.linearTransfer);
+public class Lifter extends SubsystemBase {
+  private Solenoid m_lifterSolenoid;
 
-  public LinearTransfer() {
+  public Lifter() {
     super();
+    m_lifterSolenoid = new Solenoid(Constants.lifter);
   }
 
-  public void drive(double speed) {
-    linearTransfer.set(speed);
+  public void lifterUp() {
+     m_lifterSolenoid.set(true);
   }
 
-  public int getEncoders() {
-    return linearTransfer.getSensorCollection().getQuadraturePosition();
+  public void lifterDown() {
+     m_lifterSolenoid.set(false);
   }
+
+  public void lifterToggle() {
+  m_lifterSolenoid.set(!m_lifterSolenoid.get());
+ }
 
 }
